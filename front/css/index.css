@@ -1,1 +1,14 @@
+* {
+    list-style-type: none;
+    text-decoration: none;
+}
+
 #map { height: 100vh; }
+
+.listnav {
+    display: flex;
+    flex-direction: row;
+}
+.listnav > li {
+    margin: 100px;
+}
