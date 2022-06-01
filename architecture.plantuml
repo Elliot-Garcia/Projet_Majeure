@@ -38,7 +38,7 @@ package Model <<Rectangle>> {
             compare()
         }
 
-        package Affectation <<rectangle>> {
+        package BlocAffectation <<rectangle>> {
             class Strategy {
                 - feux
                 - casernes
@@ -47,22 +47,13 @@ package Model <<Rectangle>> {
             }
         }
 
-        package Mission <<rectangle>> {
-            class Deplacement {
-                Chemin()
-                DeplacementV()
-                ActualisationAPI()
-            }
-            class EteindreFeu {
-                AllerFeu()
-            }
-            class GestionFin {
-                RentrerCaserne()
+        package BlocMission <<rectangle>> {
+            class Mission {
             }
         }
 
-        RemoteCall -> Affectation
-        Strategy -> Mission
+        RemoteCall -> BlocAffectation
+        Strategy -> BlocMission
 
         interface InterfaceVehicule {
             - mission
