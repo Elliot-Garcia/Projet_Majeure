@@ -70,7 +70,8 @@ function displayFire(fireList){
         }
     }
 
-    console.log("res fire: ", {'fire':resFire});
+    console.log("res fire: ", JSON.stringify({'fire':resFire}));
+
 }
 
 /**
