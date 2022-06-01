@@ -10,7 +10,7 @@ const geojson = {
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg';
 const map = new mapboxgl.Map({
     container: 'map',
-    zoom: 13,
+    zoom: 12,
     center: [4.8356922252436885, 45.76070528435303],
     style: 'mapbox://styles/mapbox/light-v10',
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
@@ -31,19 +31,13 @@ for (const feature of geojson.fire) {
                 `<h3>Fire ${feature.id}</h3>
                 <ul>
                     <li>
+                        <p>Fire type : ${feature.type}</p>
+                    </li>
+                    <li>
                         <p>intensity : ${feature.intensity}</p>
                     </li>
                     <li>
-                        <p>latitude : ${feature.lat}</p>
-                    </li>
-                    <li>
-                        <p>longitude : ${feature.lon}</p>
-                    </li>
-                    <li>
                         <p>range : ${feature.range}</p>
-                    </li>
-                    <li>
-                        <p>type : ${feature.type}</p>
                     </li>
                 </ul>`
             )
