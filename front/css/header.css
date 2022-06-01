@@ -1,0 +1,9 @@
+header {
+    height: var(--nav-height);
+    background-color: gray;
+}
+
+.listnav {
+    display: flex;
+    flex-direction: row;
+}
