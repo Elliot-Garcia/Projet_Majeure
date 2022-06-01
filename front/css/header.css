@@ -3,7 +3,17 @@ header {
     background-color: gray;
 }
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+}
+
 .listnav {
     display: flex;
     flex-direction: row;
+}
+
+.listnav > img {
+    height: 100%;
+    object-fit: scale-down;
 }
