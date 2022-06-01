@@ -1,0 +1,86 @@
+@startuml
+
+package Model <<Rectangle>> {
+    entity Vehicule {
+      - int @id
+      - int crewMember
+      - int facilityRefID
+      - float fuel
+      - double lat
+      - double lon
+      - float liquidQuantity
+      - liquidType liquidType
+      - typeVehicule type
+
+      @setter()
+      @getter()
+    }
+
+    entity Feu {
+        - @id
+    }
+    entity Caserne {
+        - @id
+    }
+
+    enum liquidType {
+        ALL
+        CARBON_DIOXIDE
+        ...
+    }
+
+    package VehiculeModel <<Folder>> {
+
+        interface InterfaceVehicule {
+
+        }
+
+        abstract AbstractVehicule {
+            - mission
+            deplacement()
+            ravitaillement()
+            gestionCrew()
+        }
+
+        class Car {
+            - mission
+            - Vehicule info
+        }
+        class Truck {
+            - mission
+            - Vehicule info
+        }
+
+        InterfaceVehicule o.. AbstractVehicule
+        AbstractVehicule o-- Car
+        AbstractVehicule o-- Truck
+    }
+
+}
+
+package Controller <<Rectangle>> {
+
+    class VehiculeRepository {
+        CRUD Vehicule
+    }
+
+    class VehiculeService {
+        listVehicule()
+        update()
+    }
+
+    class VehiculeRest {
+        GET getListVehicule()
+    }
+
+    VehiculeRest -|> VehiculeService
+    VehiculeService -|> VehiculeRepository
+
+    VehiculeRepository o- Vehicule
+    VehiculeService o- InterfaceVehicule
+
+}
+
+
+
+@enduml
