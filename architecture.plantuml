@@ -29,14 +29,39 @@ package Model <<Rectangle>> {
         ...
     }
 
-    package VehiculeModel <<Folder>> {
+    package Manager <<Folder>> {
+
+        package Affectation <<rectangle>> {
+            class Strategy {
+                calculScore()
+            }
+        }
+
+        package Mission <<rectangle>> {
+            class Deplacement {
+                Chemin()
+                DeplacementV()
+                ActualisationAPI()
+            }
+            class EteindreFeu {
+                AllerFeu()
+            }
+            class GestionFin {
+                RentrerCaserne()
+            }
+        }
 
         interface InterfaceVehicule {
-
+            - mission
+            - Vehicule info
+            deplacement()
+            ravitaillement()
+            gestionCrew()
         }
 
         abstract AbstractVehicule {
             - mission
+            - Vehicule info
             deplacement()
             ravitaillement()
             gestionCrew()
@@ -71,6 +96,7 @@ package Controller <<Rectangle>> {
 
     class VehiculeRest {
         GET getListVehicule()
+        POST updateVehicule()
     }
 
     VehiculeRest -|> VehiculeService
