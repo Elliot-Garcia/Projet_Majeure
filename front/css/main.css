@@ -12,3 +12,9 @@
     --nav-height: 50px;
     --body-height: calc(100vh - var(--nav-height));
 }
+
+/* https://codepen.io/sosuke/pen/Pjoqqp */
+
+.filter_red {
+    filter: invert(18%) sepia(74%) saturate(6938%) hue-rotate(357deg) brightness(103%) contrast(92%);
+}

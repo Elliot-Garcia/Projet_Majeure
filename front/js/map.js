@@ -20,7 +20,7 @@ const map = new mapboxgl.Map({
 for (const feature of geojson.fire) {
     // create a HTML element for each feature
     const el = document.createElement('div');
-    el.className = 'marker';
+    el.className = 'marker filter_red';
      
     // make a marker for each feature and add it to the map
     new mapboxgl.Marker(el)

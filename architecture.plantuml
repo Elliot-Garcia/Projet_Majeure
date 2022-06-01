@@ -31,8 +31,18 @@ package Model <<Rectangle>> {
 
     package Manager <<Folder>> {
 
+        class RemoteCall {
+            requestFires()
+            requestVehicules()
+            casernes()
+            compare()
+        }
+
         package Affectation <<rectangle>> {
             class Strategy {
+                - feux
+                - casernes
+                - vehicules
                 calculScore()
             }
         }
@@ -50,6 +60,9 @@ package Model <<Rectangle>> {
                 RentrerCaserne()
             }
         }
+
+        RemoteCall -> Affectation
+        Strategy -> Mission
 
         interface InterfaceVehicule {
             - mission
