@@ -23,12 +23,11 @@
                 <h3 class="ui dividing header">Add Vehicle</h3>
 
 
-                <form id="formAddCard" class="ui form" action="https://asi2-backend-market.herokuapp.com/card"
-                 method="POST">
+                <form id="formAddVehicle" class="ui form">
 
                     <div class="field">
                         <label>CrewMember</label>
-                        <input type="number" name="member" min="1" max="5">
+                        <input type="number" name="crewMember" min="1" max="5">
                     </div>
 
                     <div class="field">
@@ -54,7 +53,7 @@
                     <div class="field">
                         <label>liquidType</label>
                         <select name="liquidType"> 
-                            <option value="eau">eau</option>
+                            <option value="WATER">WATER</option>
                             <option value="eau avec additif ou mousse">eau avec additif ou mousse</option>
                             <option value="dioxyde de carbone">dioxyde de carbone</option>
                             <option value="poudre">poudre</option>
@@ -80,8 +79,22 @@
 
 
                     <button class="ui button" type="reset" >Reset</button>
-                    <button class="ui button" type="button"  onclick="AddVehicle()" >Submbit</button>
+                    <button class="ui button" type="button"  onclick="AddVehicle()">Submbit</button>
                     </form>
+
+                    <br>
+                    <h3 class="ui dividing header">Delete Vehicle</h3>
+                    <form id="formDeleteVehicle" class="ui form">
+
+                        <div class="id">
+                            <label>Vehicle_id</label>
+                            <input type="number" name="id">
+                        </div>
+                        <button class="ui button" type="button"  onclick="DeleteOneVehicle()">DELETE</button>
+                        <button class="ui button" type="button"  onclick="DeleteAllVehicle()">DELETE ALL</button>
+
+                        </form>
+    
 
                     <p id="succesMessage"></p>
 
