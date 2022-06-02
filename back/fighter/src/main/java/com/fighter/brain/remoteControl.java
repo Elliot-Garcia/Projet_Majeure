@@ -1,5 +1,7 @@
 package com.fighter.brain;
 
+import java.util.Arrays;
+
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.DTOclass;
 import com.fighter.model.dto.FacilityDto;
@@ -13,55 +15,110 @@ public class remoteControl {
 	private FireDto[] fire;
 	private VehiculeDto[] vehicule;
 	private FacilityDto[] facility;
-
+	
+	private int[] newFire;
+	
 
 	public remoteControl() {
 
-		this.fire = Requester.requestFire();
+		//this.fire = Requester.requestFire();
 		this.vehicule = Requester.requestVehicule();
 		this.facility = Requester.requestFacility();
 	}
 	
 	
-	public final boolean newMission() {
+	/**
+	 * launch a new statgie
+	 * @param newFire
+	 * @return
+	 */
+	public final boolean launchStrat( FireDto newFire) {
+		//lucnhe strat
+		//new strategie( newFire  );
 		
-		if( !this.compare() ) {
-			//launch new mission
-			//new strategie(FireDto feu, FacilityDto caserne, VehiculeDto vehicule)
-			return(true);
-		}
-		return false;
+		System.out.println("New strat");
+		
+		
+		return true;
 	}
 	
-	private final boolean compare() {
+	/**
+	 * Cycle of checking new fire apparition and edting dataset
+	 * @return true if new straegy attempt has been made
+	 */
+	public final boolean compare() {
 		boolean ret = true;
 		
+		this.editFacility();
+		this.editVehicule();
 		ret &= this.compareFire();
-		ret &= this.compareVehicule();
-		ret &= this.comparefacility();
 		
 		return(ret);	
 	}
 	
+	/**
+	 * Compare to set of data
+	 * @param two DTOclass[]
+	 * @return true if equals, false else
+	 */
 	private boolean compareData(DTOclass[] pastData, DTOclass[] newData) {
 
-		if (pastData.equals(newData)) {
+		if (newData.equals(pastData)) {
 			return true;
 		}
-		pastData = newData;
+
 		return false;
 	}
-
+	
+	/**
+	 * comapre new and past data about fire. 
+	 * if some new fire, spot it and ask for a new strat on it
+	 * @return true if at least one try has been made, Else false
+	 */
 	private boolean compareFire() {
-		return this.compareData( this.fire, Requester.requestFire() );
+		boolean ret = false;
+		FireDto[] newFire = Requester.requestFire();
+		
+		if (this.fire == null) {
+			for ( FireDto someFire : newFire) {
+					this.launchStrat( someFire );
+				}
+		}
+		
+		else if ( !this.compareData( this.fire, newFire )) {
+			System.out.println(this.fire);
+			for ( FireDto someFire : newFire) {
+				
+				if(Arrays.asList(this.fire).contains(someFire)) {
+					this.launchStrat( someFire );
+					ret = true;
+				}
+	        }	
+		}
+		this.fire = newFire;
+		return ret;
+	}
+
+	/**
+	 * Save new data of vehicule 
+	 * @return true
+	 */
+	private boolean editVehicule() {
+		this.vehicule = Requester.requestVehicule();
+		return true;
 	}
 	
-	private boolean compareVehicule() {
-		return this.compareData(this.vehicule, Requester.requestVehicule() );
+	/**
+	 * Save new data of Facility
+	 * @return true
+	 */
+	private boolean editFacility() {
+		this.facility = Requester.requestFacility();
+		return true;
 	}
-
-	private boolean comparefacility() {
-		return this.compareData(this.facility, Requester.requestVehicule() );
+	
+	public String toString() {
+		return getClass().getSimpleName() +"\nFire: " + this.fire.length + "\nVehicule: " + this.vehicule.length + "\nFacilty: " + this.facility.length;
 	}
 
 }
