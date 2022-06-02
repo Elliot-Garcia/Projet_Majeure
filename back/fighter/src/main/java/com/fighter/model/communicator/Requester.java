@@ -16,6 +16,17 @@ public class Requester {
 		return result;
 	}
 	
+	public static FireDto requestFireByID( int id ) {
+
+		RestTemplate restTemplate = new RestTemplate();
+		String url = ConstantURL.getFireurl() + id;
+		
+		FireDto result = restTemplate.getForObject(url, FireDto.class);
+
+		return result;
+	}
+	
+	
 	public static VehiculeDto[] requestVehicule( ) {
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -27,6 +38,14 @@ public class Requester {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		FacilityDto[] result = restTemplate.getForObject(ConstantURL.getFacilityurl(), FacilityDto[].class);
+		return result;
+	}
+	
+	public static FacilityDto requestFacilityByID( int id ) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String url = ConstantURL.getFacilityurl() + id;
+		FacilityDto result = restTemplate.getForObject(url, FacilityDto.class);
 		return result;
 	}
 
