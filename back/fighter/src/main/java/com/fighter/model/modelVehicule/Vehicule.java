@@ -1,13 +1,15 @@
 package com.fighter.model.modelVehicule;
 
-import com.fighter.model.dto.FacilityDto;
-
 public class Vehicule extends AbstractVehicule {
 
 	Vehicule() {
 		super();
 	}
-	
-	
+
+	@Override
+	public int Score() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
