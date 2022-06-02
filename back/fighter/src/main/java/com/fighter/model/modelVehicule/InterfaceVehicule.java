@@ -7,6 +7,6 @@ public interface InterfaceVehicule {
 	public boolean deplacement();
 	public boolean ravitaillement();
 	public void gestionCrew();
-	public FacilityDto findFacility();
+	public FacilityDto findFacilityById(int id);
 	
 }
