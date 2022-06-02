@@ -17,10 +17,10 @@ package Model <<Rectangle>> {
       @getter()
     }
 
-    entity Feu {
+    entity FireDto {
         - @id
     }
-    entity Caserne {
+    entity FacilityDto {
         - @id
     }
 
@@ -28,6 +28,35 @@ package Model <<Rectangle>> {
         ALL
         CARBON_DIOXIDE
         ...
+    }
+
+    package ModelVehicule <<rectangle>> {
+        interface InterfaceVehicule {
+            - mission
+            - Vehicule info
+            deplacement()
+            ravitaillement()
+            gestionCrew()
+            findCaserne()
+        }
+
+        abstract AbstractVehicule {
+            - mission
+            - Vehicule info
+            deplacement()
+            ravitaillement()
+            gestionCrew()
+            findCaserne()
+        }
+
+        class Vehicule {
+            - mission
+            - VehiculeDto vehiculeDto
+            calculScore()
+        }
+
+        InterfaceVehicule o.. AbstractVehicule
+        AbstractVehicule o-- Vehicule
     }
 
     package Manager <<Folder>> {
@@ -50,37 +79,21 @@ package Model <<Rectangle>> {
             }
         }
 
-        RemoteCall -> BlocAffectation
+        RemoteControl -> BlocAffectation
         Strategy -> BlocMission
 
-        interface InterfaceVehicule {
-            - mission
-            - Vehicule info
-            deplacement()
-            ravitaillement()
-            gestionCrew()
+    }
+
+    package Communicator <<Folder>> {
+
+        class requester {
+
         }
 
-        abstract AbstractVehicule {
-            - mission
-            - Vehicule info
-            deplacement()
-            ravitaillement()
-            gestionCrew()
+        enum constant {
+
         }
 
-        class Car {
-            - mission
-            - Vehicule info
-        }
-        class Truck {
-            - mission
-            - Vehicule info
-        }
-
-        InterfaceVehicule o.. AbstractVehicule
-        AbstractVehicule o-- Car
-        AbstractVehicule o-- Truck
     }
 
 }
@@ -104,7 +117,6 @@ package Controller <<Rectangle>> {
     VehiculeRest -|> VehiculeService
     VehiculeService -|> VehiculeRepository
 
-    VehiculeRepository o- Vehicule
     VehiculeService o- InterfaceVehicule
 
 }
