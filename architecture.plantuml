@@ -1,7 +1,7 @@
 @startuml
 
 package Model <<Rectangle>> {
-    entity Vehicule {
+    entity VehiculeDto {
       - int @id
       - int crewMember
       - int facilityRefID
@@ -12,6 +12,7 @@ package Model <<Rectangle>> {
       - liquidType liquidType
       - typeVehicule type
 
+        @VehiculeDto(String)
       @setter()
       @getter()
     }
@@ -31,11 +32,8 @@ package Model <<Rectangle>> {
 
     package Manager <<Folder>> {
 
-        class RemoteCall {
-            requestFires()
-            requestVehicules()
-            casernes()
-            compare()
+        class RemoteControl {
+            newMission()
         }
 
         package BlocAffectation <<rectangle>> {

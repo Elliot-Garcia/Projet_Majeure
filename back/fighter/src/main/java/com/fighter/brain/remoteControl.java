@@ -1,4 +1,7 @@
 package com.fighter.brain;
+import com.fighter.model.dto.FacilityDto;
+import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
 import com.fighter.vehiculeModel.testClasse;
 
 
@@ -21,13 +24,18 @@ public class remoteControl {
 		this.fire = this.request(urlFire);
 		this.vehicule = this.request(urlVehicule);
 		this.facility = this.request(urlFacility);
+		
+		
 	}
 	
 	public final boolean newMission() {
 		
 		if( !this.compare() ) {
-			
+			//launch new mission
+			//new strategie(FireDto feu, FacilityDto caserne, VehiculeDto vehicule)
+			return(true);
 		}
+		return false;
 	}
 	
 	private final boolean compare() {
