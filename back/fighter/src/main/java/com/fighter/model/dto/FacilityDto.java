@@ -2,7 +2,7 @@ package com.fighter.model.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FacilityDto {
+public class FacilityDto extends DTOclass  {
 	
 		private Integer id;
 		private double lon;

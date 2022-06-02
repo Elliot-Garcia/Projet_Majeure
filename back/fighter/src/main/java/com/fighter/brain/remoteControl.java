@@ -1,58 +1,124 @@
 package com.fighter.brain;
-import com.fighter.vehiculeModel.testClasse;
 
+import java.util.Arrays;
 
-
-import org.springframework.web.client.RestTemplate;
+import com.fighter.model.communicator.Requester;
+import com.fighter.model.dto.DTOclass;
+import com.fighter.model.dto.FacilityDto;
+import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
 
 
 
 public class remoteControl {
-	private final String urlFire = "http://vps.cpe-sn.fr:8081/fire/";
-	private final String urlVehicule = "http://vps.cpe-sn.fr:8081/vehicle/";
-	private final String urlFacility = "http://vps.cpe-sn.fr:8081/facility/";
+
+	private FireDto[] fire;
+	private VehiculeDto[] vehicule;
+	private FacilityDto[] facility;
 	
-	private String fire;
-	private String vehicule;
-	private String facility;
+	private int[] newFire;
 	
 
 	public remoteControl() {
-		this.fire = this.request(urlFire);
-		this.vehicule = this.request(urlVehicule);
-		this.facility = this.request(urlFacility);
-	}
-	
-	
-	private String request( String URL) {
-		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject(URL, String.class);
-		
-		return result;
-	}
-	
-	private boolean compareData( String URL, String pastData) {
-		String data = this.request(URL);
 
-		if (data.equals(pastData)) {
+		//this.fire = Requester.requestFire();
+		this.vehicule = Requester.requestVehicule();
+		this.facility = Requester.requestFacility();
+	}
+	
+	
+	/**
+	 * launch a new statgie
+	 * @param newFire
+	 * @return
+	 */
+	public final boolean launchStrat( FireDto newFire) {
+		//lucnhe strat
+		//new strategie( newFire  );
+		
+		System.out.println("New strat");
+		
+		
+		return true;
+	}
+	
+	/**
+	 * Cycle of checking new fire apparition and edting dataset
+	 * @return true if new straegy attempt has been made
+	 */
+	public final boolean compare() {
+		boolean ret = true;
+		
+		this.editFacility();
+		this.editVehicule();
+		ret &= this.compareFire();
+		
+		return(ret);	
+	}
+	
+	/**
+	 * Compare to set of data
+	 * @param two DTOclass[]
+	 * @return true if equals, false else
+	 */
+	private boolean compareData(DTOclass[] pastData, DTOclass[] newData) {
+
+		if (newData.equals(pastData)) {
 			return true;
 		}
-		pastData = data;
+
 		return false;
 	}
 	
+	/**
+	 * comapre new and past data about fire. 
+	 * if some new fire, spot it and ask for a new strat on it
+	 * @return true if at least one try has been made, Else false
+	 */
 	private boolean compareFire() {
-		return this.compareData(this.urlFire, this.fire );
+		boolean ret = false;
+		FireDto[] newFire = Requester.requestFire();
+		
+		if (this.fire == null) {
+			for ( FireDto someFire : newFire) {
+					this.launchStrat( someFire );
+				}
+		}
+		
+		else if ( !this.compareData( this.fire, newFire )) {
+			System.out.println(this.fire);
+			for ( FireDto someFire : newFire) {
+				
+				if(Arrays.asList(this.fire).contains(someFire)) {
+					this.launchStrat( someFire );
+					ret = true;
+				}
+	        }	
+		}
+		this.fire = newFire;
+		return ret;
+	}
+
+	/**
+	 * Save new data of vehicule 
+	 * @return true
+	 */
+	private boolean editVehicule() {
+		this.vehicule = Requester.requestVehicule();
+		return true;
 	}
 	
-	private boolean compareVehicule() {
-		return this.compareData(this.urlVehicule, this.vehicule );
+	/**
+	 * Save new data of Facility
+	 * @return true
+	 */
+	private boolean editFacility() {
+		this.facility = Requester.requestFacility();
+		return true;
 	}
 	
-	private boolean comparefacility() {
-		return this.compareData(this.urlFacility, this.facility );
+	public String toString() {
+		return getClass().getSimpleName() +"\nFire: " + this.fire.length + "\nVehicule: " + this.vehicule.length + "\nFacilty: " + this.facility.length;
 	}
-	
-	
-	
+
 }

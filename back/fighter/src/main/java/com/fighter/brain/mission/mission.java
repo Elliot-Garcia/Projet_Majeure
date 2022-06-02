@@ -1,23 +1,27 @@
 package com.fighter.brain.mission;
 
+import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
+import com.fighter.model.modelVehicule.InterfaceVehicule;
+
 public class mission {
 
-	private Vehicule vehicule;
-	private Feu feu;
+	private InterfaceVehicule vehicule;
+	private FireDto feu;
 	
-	mission(Vehicule v, Feu f) {
+	mission(InterfaceVehicule v, FireDto f) {
 		this.vehicule = v;
 		this.feu = f;
 	}
 	
 	public void debutMission() {
-		this.vehicule.lat = this.feu.lat;
-		this.vehicule.lon = this.feu.lon;
+		this.vehicule.getVehiculeDto().setLat(this.feu.getLat());
+		this.vehicule.getVehiculeDto().setLon(this.feu.getLon());
 	}
 	
 	public void finMission() {
-		this.vehicule.lat = this.vehicule.caserne.lon;
-		this.vehicule.lon = this.vehicule.caserne.lon;
+		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLat());
+		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLon());
 	}
 	
 }
