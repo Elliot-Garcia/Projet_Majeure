@@ -23,6 +23,23 @@ public class remoteControl {
 		this.facility = this.request(urlFacility);
 	}
 	
+	public final boolean newMission() {
+		
+		if( !this.compare() ) {
+			
+		}
+	}
+	
+	private final boolean compare() {
+		boolean ret = true;
+		
+		ret &= this.compareFire();
+		ret &= this.compareVehicule();
+		ret &= this.comparefacility();
+		
+		return(ret);	
+	}
+	
 	
 	private String request( String URL) {
 		RestTemplate restTemplate = new RestTemplate();
@@ -52,7 +69,5 @@ public class remoteControl {
 	private boolean comparefacility() {
 		return this.compareData(this.urlFacility, this.facility );
 	}
-	
-	
-	
+
 }
