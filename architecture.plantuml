@@ -86,11 +86,11 @@ package Model <<Rectangle>> {
 
     package Communicator <<Folder>> {
 
-        class requester {
+        class Requester {
 
         }
 
-        enum constant {
+        enum ConstantURL {
 
         }
 
