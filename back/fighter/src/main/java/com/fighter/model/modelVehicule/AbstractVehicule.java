@@ -39,7 +39,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 	
 	@Override
-	public FacilityDto findFacility() {
+	public FacilityDto findFacilityById(int id) {
 		int idFacility = this.vehicule.getFacilityRefID();
 		
 		return null;
