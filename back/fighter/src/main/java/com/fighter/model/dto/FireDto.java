@@ -1,5 +1,5 @@
 package com.fighter.model.dto;
-public class FireDto {
+public class FireDto extends DTOclass {
 	
 	private Integer id;
 	private String type;

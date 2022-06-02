@@ -1,32 +1,27 @@
 package com.fighter.brain;
+
+import com.fighter.model.communicator.Requester;
+import com.fighter.model.dto.DTOclass;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
-import com.fighter.vehiculeModel.testClasse;
-
-
-
-import org.springframework.web.client.RestTemplate;
 
 
 
 public class remoteControl {
-	private final String urlFire = "http://vps.cpe-sn.fr:8081/fire/";
-	private final String urlVehicule = "http://vps.cpe-sn.fr:8081/vehicle/";
-	private final String urlFacility = "http://vps.cpe-sn.fr:8081/facility/";
-	
-	private String fire;
-	private String vehicule;
-	private String facility;
-	
+
+	private FireDto[] fire;
+	private VehiculeDto[] vehicule;
+	private FacilityDto[] facility;
+
 
 	public remoteControl() {
-		this.fire = this.request(urlFire);
-		this.vehicule = this.request(urlVehicule);
-		this.facility = this.request(urlFacility);
-		
-		
+
+		this.fire = Requester.requestFire();
+		this.vehicule = Requester.requestVehicule();
+		this.facility = Requester.requestFacility();
 	}
+	
 	
 	public final boolean newMission() {
 		
@@ -48,34 +43,25 @@ public class remoteControl {
 		return(ret);	
 	}
 	
-	
-	private String request( String URL) {
-		RestTemplate restTemplate = new RestTemplate();
-		String result = restTemplate.getForObject(URL, String.class);
-		
-		return result;
-	}
-	
-	private boolean compareData( String URL, String pastData) {
-		String data = this.request(URL);
+	private boolean compareData(DTOclass[] pastData, DTOclass[] newData) {
 
-		if (data.equals(pastData)) {
+		if (pastData.equals(newData)) {
 			return true;
 		}
-		pastData = data;
+		pastData = newData;
 		return false;
 	}
-	
+
 	private boolean compareFire() {
-		return this.compareData(this.urlFire, this.fire );
+		return this.compareData( this.fire, Requester.requestFire() );
 	}
 	
 	private boolean compareVehicule() {
-		return this.compareData(this.urlVehicule, this.vehicule );
+		return this.compareData(this.vehicule, Requester.requestVehicule() );
 	}
-	
+
 	private boolean comparefacility() {
-		return this.compareData(this.urlFacility, this.facility );
+		return this.compareData(this.facility, Requester.requestVehicule() );
 	}
 
 }
