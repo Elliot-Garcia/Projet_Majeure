@@ -17,6 +17,8 @@ function AddVehicle(){
         .then(response => response)
             .then(response => callback(response))
             .catch(error => err_callback(error));
+    console.log(response)
+    return response;
 }
 
 /**
@@ -133,7 +135,7 @@ function getID(){
 
 
 
-function GetVehicle(){
+async function GetVehicle(){
     const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle";
     let context =   {
                         method: 'GET',
@@ -142,21 +144,44 @@ function GetVehicle(){
                             'Content-Type': 'application/json'
                           },
                     };
-    fetch(GET_CHUCK_URL,context)
+    return fetch(GET_CHUCK_URL,context)
         .then(response => response.json())
-            .then(response => DisplayVehicle(response))
-            .catch(error => err_callback(error));
+        .catch(error => err_callback(error));
 }
 
 function DisplayVehicle(vehicle){
     for (let i = 0; i < vehicle.length; i++) {
         const el = document.createElement('div');
-        el.className = 'marker';
+        
         if((vehicle[i].facilityRefID) == 84){
-            new mapboxgl.Marker(el).setLngLat([vehicle[i].lon,vehicle[i].lat]).addTo(map);
+            el.className = 'marker_notre_vehicle';
+            new mapboxgl.Marker(el)
+                .setLngLat([vehicle[i].lon,vehicle[i].lat])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 }) // add popups
+                    .setHTML(
+                        `<h3>Vehicule ${vehicle[i].id}</h3>
+                        <ul>
+                            <li>
+                                <p>CrewMember : ${vehicle[i].crewMember}</p>
+                            </li>
+                            <li>
+                                <p>fuel : ${vehicle[i].fuel}</p>
+                            </li>
+                            <li>
+                                <p>LiquidQuantity : ${vehicle[i].liquidQuantity}</p>
+                            </li>
+                            <li>
+                                <p>LiquidType : ${vehicle[i].liquidType}</p>
+                            </li>
+                        </ul>`
+                    )
+                    )
+                .addTo(map);
             
         }
         else{
+            el.className = 'marker_vehicle';
             new mapboxgl.Marker(el).setLngLat([vehicle[i].lon,vehicle[i].lat]).addTo(map);
         }
       }
