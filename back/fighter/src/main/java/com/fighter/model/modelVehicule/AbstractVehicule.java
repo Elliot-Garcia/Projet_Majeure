@@ -2,6 +2,7 @@ package com.fighter.model.modelVehicule;
 
 import java.util.Set;
 
+import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.VehiculeDto;
 
@@ -14,10 +15,6 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	
 	AbstractVehicule() {
 		this.vehicule = new VehiculeDto();
-		this.facility = request(urlFacility);
-		
-		RestTemplate restTemplate = new RestTemplate();
-		FacilityDto[] result = restTemplate.getForObject(this.urlFacility, FacilityDto[].class);
 	}
 	
 	@Override
@@ -41,7 +38,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	@Override
 	public FacilityDto findFacilityById(int id) {
 		int idFacility = this.vehicule.getFacilityRefID();
-		
+		FacilityDto[] facility = Requester.requestFacilityById(idFacility);
 		return null;
 	}
 	
