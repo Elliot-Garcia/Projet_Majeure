@@ -1,6 +1,6 @@
 package com.fighter.model.dto;
 
-public class VehiculeDto {
+public class VehiculeDto extends DTOclass  {
 		public static final int CREW_MEMBER_START_VALUE=-1;
 		private Integer id;
 		private double lon;

@@ -12,30 +12,22 @@ import com.fighter.model.dto.FireDto;
 
 
 
-public class remoteControl<T> {
+public class remoteControlBack {
 	private final String urlFire = "http://vps.cpe-sn.fr:8081/fire/";
 	private final String urlVehicule = "http://vps.cpe-sn.fr:8081/vehicle/";
 	private final String urlFacility = "http://vps.cpe-sn.fr:8081/facility/";
 	
-	private T[] fire;
-	
-	final Class<T> typeParameterClass;
+	private FireDto[] fire;
 	private DTOclass[] vehicule;
 	private DTOclass[] facility;
 	
 
-	public remoteControl(Class<T> typeParameterClass) {
+	public remoteControlBack() {
 		
-		this.typeParameterClass = typeParameterClass;
-		
-		System.out.println(this.typeParameterClass);
-		System.out.println();
-		
-		this.fire = this.request(urlFire);
-		//this.vehicule = this.request(urlVehicule, this.vehicule);
-		//this.facility = this.request(urlFacility, this.facility);
+		this.fire = (FireDTO[])(this.request(urlFire, this.fire));
+		this.vehicule = this.request(urlVehicule, this.vehicule);
+		this.facility = this.request(urlFacility, this.facility);
 	}
-	
 	
 	public final boolean newMission() {
 		
@@ -58,13 +50,11 @@ public class remoteControl<T> {
 	}
 	
 	
-	private T[] request( String URL ) {
+	private <T> T[] request( String URL, T[] pastData) {
 		
 		System.out.println("OUI");
 		RestTemplate restTemplate = new RestTemplate();
-		
-		this.typeParameterClass[] result = restTemplate.getForObject(URL, this.typeParameterClass[].class);
-		
+		T[] result = restTemplate.getForObject(URL, T[].class);
 		System.out.println(result[0]);
 
 		return result;
