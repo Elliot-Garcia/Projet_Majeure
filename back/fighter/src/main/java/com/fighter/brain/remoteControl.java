@@ -37,7 +37,7 @@ public class remoteControl {
 		//new strategie( newFire  );
 		
 		System.out.println("New strat");
-		
+		strategie( newFire ,this.facility, this.vehicule);
 		
 		return true;
 	}
