@@ -1,21 +1,26 @@
+function mytest() {
+    return 0;
+}
+
+
 /**
 * Get all fire
 * @author   la casern de notre dame
 * @param    none
 * @return   none
 */
-function getFire(){
-    const URL="http://vps.cpe-sn.fr:8081/fire/";
+async function getFire(){
+
+    const myURL="http://vps.cpe-sn.fr:8081/fire/";
     let context =   {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
                           }
                     };
-    fetch(URL,context)
+    return fetch(myURL,context)
         .then(response => response.json())
-            .then(response => displayFire(response))
-            .catch(error =>(error));
+        .catch(error => {console.log(error)});    
 }
 
 /**
@@ -51,7 +56,7 @@ function getOneFire(){
 */
 function displayFire(fireList){
 
-    const filter = infoFilter();
+    /*const filter = infoFilter();
     const keyFilter = Object.keys(filter)
 
     var resFire = [];
@@ -71,7 +76,8 @@ function displayFire(fireList){
     }
 
     console.log("res fire: ", JSON.stringify({'fire':resFire}));
-
+*/
+    return fireList;
 }
 
 /**
