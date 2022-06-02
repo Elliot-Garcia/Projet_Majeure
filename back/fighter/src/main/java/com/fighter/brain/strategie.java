@@ -1,11 +1,15 @@
 package com.fighter.brain;
 
+import com.fighter.model.dto.FacilityDto;
+import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
+
 public class strategie {
 	private FireDto feu;
 	private FacilityDto caserne;
 	private VehiculeDto vehicule;
 	
-	public stategie(FireDto feu, FacilityDto caserne, Vehicule vehicule) {
+	public strategie(FireDto feu, FacilityDto caserne, VehiculeDto vehicule) {
 		this.caserne = caserne; 
 		this.feu = feu;
 		this.vehicule = vehicule;
