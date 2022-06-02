@@ -19,11 +19,11 @@
     filter: invert(18%) sepia(74%) saturate(6938%) hue-rotate(357deg) brightness(103%) contrast(92%);
 }
 .filter_green {
-    filter: invert(18%) sepia(74%) saturate(6938%) hue-rotate(357deg) brightness(103%) contrast(92%);
+    filter: invert(49%) sepia(78%) saturate(1437%) hue-rotate(81deg) brightness(119%) contrast(121%);
 }
 .filter_blue {
-    filter: invert(18%) sepia(74%) saturate(6938%) hue-rotate(357deg) brightness(103%) contrast(92%);
+    filter: invert(69%) sepia(87%) saturate(5320%) hue-rotate(162deg) brightness(96%) contrast(101%);
 }
 .filter_gray {
-    filter: invert(18%) sepia(74%) saturate(6938%) hue-rotate(357deg) brightness(103%) contrast(92%);
+    filter: invert(0%) sepia(20%) saturate(1636%) hue-rotate(359deg) brightness(85%) contrast(87%);
 }
