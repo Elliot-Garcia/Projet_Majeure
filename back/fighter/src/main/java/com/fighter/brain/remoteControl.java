@@ -1,39 +1,25 @@
 package com.fighter.brain;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import org.springframework.web.client.RestTemplate;
-
-import com.fighter.model.dto.DTO;
+import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.DTOclass;
+import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
 
 
 
-public class remoteControl<T> {
-	private final String urlFire = "http://vps.cpe-sn.fr:8081/fire/";
-	private final String urlVehicule = "http://vps.cpe-sn.fr:8081/vehicle/";
-	private final String urlFacility = "http://vps.cpe-sn.fr:8081/facility/";
-	
-	private T[] fire;
-	
-	final Class<T> typeParameterClass;
-	private DTOclass[] vehicule;
-	private DTOclass[] facility;
-	
+public class remoteControl {
 
-	public remoteControl(Class<T> typeParameterClass) {
-		
-		this.typeParameterClass = typeParameterClass;
-		
-		System.out.println(this.typeParameterClass);
-		System.out.println();
-		
-		this.fire = this.request(urlFire);
-		//this.vehicule = this.request(urlVehicule, this.vehicule);
-		//this.facility = this.request(urlFacility, this.facility);
+	private FireDto[] fire;
+	private VehiculeDto[] vehicule;
+	private FacilityDto[] facility;
+
+
+	public remoteControl() {
+
+		this.fire = Requester.requestFire();
+		this.vehicule = Requester.requestVehicule();
+		this.facility = Requester.requestFacility();
 	}
 	
 	
@@ -57,40 +43,25 @@ public class remoteControl<T> {
 		return(ret);	
 	}
 	
-	
-	private T[] request( String URL ) {
-		
-		System.out.println("OUI");
-		RestTemplate restTemplate = new RestTemplate();
-		
-		this.typeParameterClass[] result = restTemplate.getForObject(URL, this.typeParameterClass[].class);
-		
-		System.out.println(result[0]);
+	private boolean compareData(DTOclass[] pastData, DTOclass[] newData) {
 
-		return result;
-	}
-	
-	private boolean compareData( String URL, DTOclass[] pastData) {
-		
-		DTOclass[] data = request(URL, pastData);
-
-		if (data.equals(pastData)) {
+		if (pastData.equals(newData)) {
 			return true;
 		}
-		pastData = data;
+		pastData = newData;
 		return false;
 	}
-	
+
 	private boolean compareFire() {
-		return this.compareData(this.urlFire, this.fire );
+		return this.compareData( this.fire, Requester.requestFire() );
 	}
 	
 	private boolean compareVehicule() {
-		return this.compareData(this.urlVehicule, this.vehicule );
+		return this.compareData(this.vehicule, Requester.requestVehicule() );
 	}
-	
+
 	private boolean comparefacility() {
-		return this.compareData(this.urlFacility, this.facility );
+		return this.compareData(this.facility, Requester.requestVehicule() );
 	}
 
 }
