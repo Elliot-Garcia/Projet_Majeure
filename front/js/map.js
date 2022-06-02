@@ -1,11 +1,25 @@
-const geojson = {
-    "fire": [
-        {"id":57,"type":"C_Flammable_Gases","intensity":50,"range":50,"lon":4.8260937761478795,"lat":45.732333858926715},
-        {"id":59,"type":"B_Gasoline","intensity":50,"range":50,"lon":4.808583763718545,"lat":45.793118996773316}
-    ]
-};
+const geojson = [
+    {
+        "value": "fire",
+        "list": []
+    },
+    {
+        "value": "facility",
+        "list": []
+    },
+    {
+        "value": "vehicule",
+        "list": []
+    }
+];
 
-  
+async function Start(){
+    geojson[0].list = await getFire();
+    geojson[1].list = await GetFacilities();
+    geojson[2].list = await GetVehicle();
+    console.log(geojson)
+    DisplayAll();
+}
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg';
 const map = new mapboxgl.Map({
@@ -17,30 +31,93 @@ const map = new mapboxgl.Map({
 });
 
 
-for (const feature of geojson.fire) {
-    // create a HTML element for each feature
-    const el = document.createElement('div');
-    el.className = 'marker filter_red';
-     
-    // make a marker for each feature and add it to the map
-    new mapboxgl.Marker(el)
-        .setLngLat([feature.lon, feature.lat])
-        .setPopup(
-            new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML(
-                `<h3>Fire ${feature.id}</h3>
-                <ul>
-                    <li>
-                        <p>Fire type : ${feature.type}</p>
-                    </li>
-                    <li>
-                        <p>intensity : ${feature.intensity}</p>
-                    </li>
-                    <li>
-                        <p>range : ${feature.range}</p>
-                    </li>
-                </ul>`
-            )
-            )
-    .addTo(map);
+async function DisplayAll() {
+    filterValue = "";
+    for (const obj of geojson) {
+        if (obj.value == "fire") {
+            filterValue = 'filter_red';
+            urlIcon = 'media/img/point/fire.png';
+            /*htmlValue = `<h3>Fire ${feature.id}</h3>
+                        <ul>
+                            <li>
+                                <p>Fire type : ${feature.type}</p>
+                            </li>
+                            <li>
+                                <p>intensity : ${feature.intensity}</p>
+                            </li>
+                            <li>
+                                <p>range : ${feature.range}</p>
+                            </li>
+                        </ul>`;*/
+        }
+    
+        else if (obj.value == "facility") {
+            urlIcon = 'media/img/point/caserne.png';
+            /*htmlValue = `<h3>Fire ${feature.id}</h3>
+                        <ul>
+                            <li>
+                                <p>Fire type : ${feature.type}</p>
+                            </li>
+                            <li>
+                                <p>intensity : ${feature.intensity}</p>
+                            </li>
+                            <li>
+                                <p>range : ${feature.range}</p>
+                            </li>
+                        </ul>`;*/
+        }
+        else if (obj.value == "vehicule"){
+            filterValue = 'filter_red';
+            urlIcon = 'media/img/point/camion.png';
+            /*htmlValue = `<h3>Fire ${feature.list.id}</h3>
+                        <ul>
+                            <li>
+                                <p>Fire type : ${feature.type}</p>
+                            </li>
+                            <li>
+                                <p>intensity : ${feature.intensity}</p>
+                            </li>
+                            <li>
+                                <p>range : ${feature.range}</p>
+                            </li>
+                        </ul>`;*/
+        }
+        else { break; }
+
+        for (const feature of obj.list) {
+
+            if (obj.value == "facility") {
+                if ((feature.name).includes("Cas5")) {
+                    filterValue = 'filter_green';
+                }
+                else {
+                    filterValue = 'filter_gray';
+                }
+            }
+            if (obj.value == "vehicule") {
+                if ((feature.facilityRefID) == 84) {
+                    filterValue = 'filter_blue';
+                }
+                else {
+                    filterValue = 'filter_gray';
+                }
+            }
+                console.log(filterValue);
+            // create a HTML element for each feature
+            const el = document.createElement('div');
+            el.className = "marker " + filterValue;
+            el.style.backgroundImage = "url(" + urlIcon + ")";
+            
+            // make a marker for each feature and add it to the map
+            new mapboxgl.Marker(el)
+                .setLngLat([feature.lon, feature.lat])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 }) // add popups
+                    .setHTML(
+                        `<h3>Coucou</h3>`
+                    )
+                )
+            .addTo(map);
+        }
+    }
 }
