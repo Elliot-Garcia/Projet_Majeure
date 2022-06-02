@@ -15,9 +15,9 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 	
 	@Override
-	public boolean deplacement() {
-		// TODO Auto-generated method stub
-		return false;
+	public void deplacement(long lon, long lat) {
+		this.vehicule.setLon(lon);
+		this.vehicule.setLat(lat);
 	}
 
 	@Override

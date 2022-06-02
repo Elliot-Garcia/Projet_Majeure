@@ -5,7 +5,7 @@ import com.fighter.model.dto.VehiculeDto;
 
 public interface InterfaceVehicule {
 	
-	public boolean deplacement();
+	public void deplacement(long lon, long lat);
 	public boolean ravitaillement();
 	public void gestionCrew();
 	public FacilityDto findFacilityById(int id);
