@@ -5,12 +5,12 @@ import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public class mission {
+public class Mission {
 
 	private InterfaceVehicule vehicule;
 	private FireDto feu;
 	
-	public mission(InterfaceVehicule v, FireDto f) {
+	public Mission(InterfaceVehicule v, FireDto f) {
 		this.vehicule = v;
 		this.feu = f;
 	}

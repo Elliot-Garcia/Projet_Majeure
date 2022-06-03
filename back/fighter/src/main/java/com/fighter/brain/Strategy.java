@@ -1,6 +1,6 @@
 package com.fighter.brain;
 
-import com.fighter.brain.mission.mission;
+import com.fighter.brain.mission.Mission;
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
@@ -9,12 +9,12 @@ import com.fighter.model.modelVehicule.InterfaceVehicule;
 import com.fighter.model.modelVehicule.Vehicule;
 
 
-public class strategie {
+public class Strategy {
 	private FireDto feu;
 	private FacilityDto[] caserne;
 	private VehiculeDto[] vehicule;
 	
-	public strategie(FireDto feu, FacilityDto[] caserne, VehiculeDto[] vehicule) {
+	public Strategy(FireDto feu, FacilityDto[] caserne, VehiculeDto[] vehicule) {
 		this.caserne = caserne; 
 		this.feu = feu;
 		this.vehicule = vehicule;
@@ -45,7 +45,7 @@ public class strategie {
 		//mission(v, fi); //Voir la fonction à appeler
 		//Envoie vehicule et feu à la mission
 		InterfaceVehicule vehicule = new Vehicule(v);
-		mission mission = new mission(vehicule, fi);
+		Mission mission = new Mission(vehicule, fi);
 		mission.debutMission();
 
 		return true;

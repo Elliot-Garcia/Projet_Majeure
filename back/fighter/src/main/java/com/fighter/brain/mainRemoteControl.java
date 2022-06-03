@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public class mainRemoteControl {
 
 	public static void main(String[] args) {
-		remoteControl ctr = new remoteControl();
+		RemoteControl ctr = new RemoteControl();
 		
 		
 		
