@@ -37,6 +37,7 @@ public class RemoteControl {
 	 * @return
 	 */
 	private final boolean launchStrat( FireDto newFire) {
+		new launchMission(this.vehicule,newFire)
 		
 		
 		return true;
