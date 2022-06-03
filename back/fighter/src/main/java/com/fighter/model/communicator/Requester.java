@@ -72,11 +72,6 @@ public class Requester {
 		// Send request with PUT method.
 		String URL = ConstantURL.getVehiculeurl() + ConstantURL.teamCode + "/" + info.getId();
 		restTemplate.put(URL, requestBody);
-
-
-
 	}
-
-
 }
 
