@@ -1,15 +1,10 @@
 package com.fighter.brain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.fighter.brain.mission.Mission;
 import com.fighter.brain.mission.LogMission.LogMission;
-import com.fighter.model.ConstantsModel;
 import com.fighter.model.calcul.Path;
-import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
@@ -65,15 +60,20 @@ public class Strategy {
 	}
 	
 	private boolean launchMission(VehiculeDto v, FireDto fi) {
-		//mission(v, fi); //Voir la fonction à appeler
-		//Envoie vehicules et feu à la mission
+
 		InterfaceVehicule vehicules = new Vehicule(v);
-		
-		Mission mission = new Mission(vehicules, fi);
 		System.out.println("-- Debut Mission --");
-		mission.debutMission();
-
-
+	
+		//Create a Runnable is charge of executing cyclic actions 
+		Mission mission = new Mission(vehicules, fi);
+				
+		// A Runnable is held by a Thread which manage lifecycle of the Runnable
+		Thread thread  = new Thread(mission);
+				
+		// The Thread is started and the method run() of the associated DisplayRunnable is launch
+		thread.start();
+		System.out.println("-- Thread launched --" + v);
+		
 		return true;
 	}
 }

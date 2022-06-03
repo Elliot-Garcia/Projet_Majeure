@@ -74,6 +74,9 @@ public class FireDto extends DTOclass {
 
 	@Override
 	public boolean equals(Object obj) {
+
+		return true;
+		/*
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -97,7 +100,7 @@ public class FireDto extends DTOclass {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		return true;
+		return true; */
 	}
 	
 	

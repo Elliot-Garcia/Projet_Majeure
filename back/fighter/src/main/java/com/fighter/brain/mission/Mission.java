@@ -6,7 +6,7 @@ import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public class Mission implements InterfaceMission {
+public class Mission implements InterfaceMission, Runnable {
 
 	private InterfaceVehicule vehicule;
 	private FireDto feu;
@@ -54,6 +54,13 @@ public class Mission implements InterfaceMission {
 	@Override
 	public void missionAnnule() {
 		this.vehicule.missionFalse();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		System.out.println("** Je suis un thread **__" + this.vehicule);
+		System.out.println("-- Debut Mission --");
 	}
 	
 	//private void actuMission(Path path) {
