@@ -79,13 +79,24 @@ package Model <<Rectangle>> {
             }
         }
 
-        class Path {
-            + Path(Coord dep, Coord arr)
-        }
-
         RemoteControl -> BlocAffectation
         Strategy -> BlocMission
 
+    }
+
+    package BlocCalcul <<Folder>> {
+        class Path {
+            - Coord depart
+            - Coord arrivee
+            + Path(Coord dep, Coord arr)
+        }
+
+        class ConstantCalcul {
+            - vitesseVehicule {km/h}
+            - coeffKm2Coord
+            - deltaT {secondes}
+            @getter()
+        }
     }
 
     package Communicator <<Folder>> {

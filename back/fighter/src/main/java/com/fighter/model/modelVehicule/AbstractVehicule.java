@@ -1,7 +1,5 @@
 package com.fighter.model.modelVehicule;
 
-import java.util.Set;
-
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.VehiculeDto;
@@ -15,9 +13,10 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 	
 	@Override
-	public void deplacement(long lon, long lat) {
+	public void deplacement(double lon, double lat) {
 		this.vehicule.setLon(lon);
 		this.vehicule.setLat(lat);
+		Requester.putVehicule(this.vehicule);
 	}
 
 	@Override

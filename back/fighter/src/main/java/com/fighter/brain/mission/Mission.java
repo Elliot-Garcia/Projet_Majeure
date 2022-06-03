@@ -16,8 +16,7 @@ public class Mission {
 	}
 	
 	public void debutMission() {
-		this.vehicule.getVehiculeDto().setLat(this.feu.getLat());
-		this.vehicule.getVehiculeDto().setLon(this.feu.getLon());
+		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
 		Requester.putVehicule(this.vehicule.getVehiculeDto());
 	}
 	
