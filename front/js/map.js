@@ -38,39 +38,20 @@ async function DisplayAll() {
         if (obj.value == "fire") {
             filterValue = 'filter_red';
             urlIcon = 'media/img/point/fire.png';
-            /*htmlValue = `<h3>Fire ${feature.id}</h3>
-                        <ul>
-                            <li>
-                                <p>Fire type : ${feature.type}</p>
-                            </li>
-                            <li>
-                                <p>intensity : ${feature.intensity}</p>
-                            </li>
-                            <li>
-                                <p>range : ${feature.range}</p>
-                            </li>
-                        </ul>`;*/
         }
     
         else if (obj.value == "facility") {
             urlIcon = 'media/img/point/caserne.png';
-            /*htmlValue = `<h3>Fire ${feature.id}</h3>
-                        <ul>
-                            <li>
-                                <p>Fire type : ${feature.type}</p>
-                            </li>
-                            <li>
-                                <p>intensity : ${feature.intensity}</p>
-                            </li>
-                            <li>
-                                <p>range : ${feature.range}</p>
-                            </li>
-                        </ul>`;*/
         }
         else if (obj.value == "vehicule"){
             filterValue = 'filter_red';
             urlIcon = 'media/img/point/camion.png';
-            /*htmlValue = `<h3>Fire ${feature.list.id}</h3>
+        }
+        else { break; }
+        
+        for (const feature of obj.list) {
+            if(obj.value == "fire"){
+                htmlValue = `<h3>Fire ${feature.id}</h3>
                         <ul>
                             <li>
                                 <p>Fire type : ${feature.type}</p>
@@ -81,14 +62,10 @@ async function DisplayAll() {
                             <li>
                                 <p>range : ${feature.range}</p>
                             </li>
-                        </ul>`;*/
-        }
-        else { break; }
-        
-        for (const feature of obj.list) {
-
+                        </ul>`;
+            }
             if (obj.value == "facility") {
-                htmlValue = `<h3>Fire ${feature.id}</h3>
+                htmlValue = `<h3>Caserne ${feature.id}</h3>
                 <ul>
                     <li>
                         <p> maxVehicleSpace : ${feature.maxVehicleSpace}</p>
@@ -112,7 +89,7 @@ async function DisplayAll() {
                 }
             }
             if (obj.value == "vehicule") {
-                htmlValue = `<h3>Fire ${feature.id}</h3>
+                htmlValue = `<h3>${feature.type} ${feature.id}</h3>
                         <ul>
                             <li>
                                 <p> crewMember : ${feature.crewMember}</p>
