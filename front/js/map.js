@@ -29,7 +29,12 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/light-v10',
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
-
+map.addControl(
+    new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+    }),
+    'top-left'
+    );
 
 async function DisplayAll() {
     filterValue = "";
