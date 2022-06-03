@@ -48,20 +48,22 @@ public class Strategy {
 	
 	public boolean assignVehicule() {
 		
-		int max = 0;
+		int max = -1;
 		Vehicule vehiculeMax = null;
-
+		
+		System.out.println("Our car : " + ownVehicule.size() + "__________________________________________");
 		for ( Vehicule vehicule : this.ownVehicule ) {
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
 			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
-			System.out.println(score);
+			System.out.println("Score :" + score);
+			System.out.println("Bussy :" + vehicule.getMission());
 			
-			if (score > max) {
+			if (score > max && vehicule.getMission()) {
 				max = score;
 				vehiculeMax = vehicule;
 			}
 		}
-		System.out.println(vehiculeMax);
+		System.out.println("Our car : " + ownVehicule.size() + "__________________________________________");
 		if (vehiculeMax != null) {
 			 this.launchMission(vehiculeMax.getVehiculeDto(), feu);
 			 return(true);

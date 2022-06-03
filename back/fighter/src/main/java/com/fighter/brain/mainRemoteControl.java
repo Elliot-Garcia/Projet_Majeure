@@ -14,6 +14,8 @@ public class mainRemoteControl {
 			ctr.compare();
 			System.out.println(ctr);
 			
+			System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+		
 			try {
 			    Thread.sleep(750);
 			} catch(InterruptedException e) {

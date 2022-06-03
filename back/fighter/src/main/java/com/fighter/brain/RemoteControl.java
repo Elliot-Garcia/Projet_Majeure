@@ -49,25 +49,21 @@ public class RemoteControl {
 	public final boolean compare() {
 		boolean ret = true;
 		
-		this.editFacility();
-		this.editVehicule();
+		//this.editFacility();
+		//this.editVehicule();
 		ret &= this.compareFire();
-		ret &= this.checkMissionedFire();
 		
-		return(ret);	
+		return(ret);
 	}
 	
-	private boolean checkMissionedFire() {
-		boolean ret = false;
-		
-		LogMission.debutMission(new FireDto());
+	private List<FireDto> checkMissionedFire( List<FireDto> newFire ) {
 		
 		for ( FireDto missonedFire : LogMission.getFire()) {
-			if (this.fire.contains(missonedFire)){
-				ret |= this.fire.remove(missonedFire);
+			if (newFire.contains(missonedFire)){
+				newFire.remove(missonedFire);
 			}
 		}
-		return ret;
+		return newFire ;
 	}
 	
 	/**
@@ -91,21 +87,14 @@ public class RemoteControl {
 		boolean ret = false;
 		List<FireDto> newFire = Arrays.asList(Requester.requestFire());
 		
-		if (this.fire == null) {
+		System.out.println("Compare fire : ");
+		newFire = this.checkMissionedFire( newFire );
+
+		if ( (newFire.size() > 0 ) ) {
 			for ( FireDto someFire : newFire) {
+					System.out.println("Ask Strat :");
 					this.launchStrat( someFire );
 				}
-		}
-		
-		else if ( !this.compareData( this.fire, newFire )) {
-			System.out.println(this.fire);
-			for ( FireDto someFire : newFire) {
-				
-				if(this.fire.contains(someFire)) {
-					this.launchStrat( someFire );
-					ret = true;
-				}
-	        }	
 		}
 		this.fire = newFire;
 		return ret;

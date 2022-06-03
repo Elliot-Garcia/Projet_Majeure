@@ -26,9 +26,6 @@ public class Vehicule extends AbstractVehicule {
 		LiquidType liquidType = vehicule.getLiquidType();
 		int score_liquidType = (int) (-0.5 + liquidType.getEfficiency(fire.getType())) * 10;
 		
-		System.out.println("Score in : " + score_liquidType);
-		System.out.println("Fire : " + fire.getType());
-		
 		score += score_liquidType;
 		
 		// Score with distance

@@ -9,6 +9,7 @@ public interface InterfaceVehicule {
 	
 	public void missionTrue();
 	public void missionFalse();
+	public boolean getMission();
 	public void deplacement(double lon, double lat);
 	public int calculScore(FireDto fire, FacilityDto facility, Path path);
 	public void gestionCrew();
