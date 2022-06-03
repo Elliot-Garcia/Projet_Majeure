@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
 
@@ -24,6 +27,19 @@ public class Path {
 	}
 	
 
+	public boolean pathTest() {
+		MapBoxPath map = new MapBoxPath();
+		JSONObject json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
+		System.out.println(json);
+		JSONObject routes = (JSONObject) json.getJSONObject(json.get("routes"));
+		System.out.println(routes);
+		JSONObject geometry = (JSONObject) json.get("geometry");
+		System.out.println(geometry);
+		JSONObject coordinates = (JSONObject) json.get("coordinates");
+		System.out.println(geometry);
+		
+		return false;
+	}
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
@@ -91,13 +107,13 @@ public class Path {
 	public static void main(String[] args) throws InterruptedException  {
 		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
 		p.pathNewPoint();
-
-
+		p.pathTest();
+/**
 		while(true) {
 			TimeUnit.MILLISECONDS.sleep(1);
 			p.pathNewPoint();
 		}
-
+*/
 	}
 	
 }
