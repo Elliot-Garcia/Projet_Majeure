@@ -10,6 +10,8 @@ import com.fighter.model.dto.VehiculeDto;
 
 
 
+
+
 public class remoteControl {
 
 	private FireDto[] fire;
@@ -37,7 +39,7 @@ public class remoteControl {
 		//new strategie( newFire  );
 		
 		System.out.println("New strat");
-		strategie( newFire ,this.facility, this.vehicule);
+		new strategie( newFire ,this.facility, this.vehicule).calculScore(newFire ,this.facility, this.vehicule);
 		
 		return true;
 	}

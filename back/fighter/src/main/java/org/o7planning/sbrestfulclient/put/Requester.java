@@ -1,13 +1,16 @@
 package com.fighter.model.communicator;
 
+import org.springframework.web.client.RestTemplate;
+
+import com.fighter.model.communicator.ConstantURL;
+import com.fighter.model.dto.FacilityDto;
+import com.fighter.model.dto.FireDto;
+import com.fighter.model.dto.VehiculeDto;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
-
-import com.fighter.model.dto.FacilityDto;
-import com.fighter.model.dto.FireDto;
-import com.fighter.model.dto.VehiculeDto;
 
 
 public class Requester {
@@ -51,8 +54,8 @@ public class Requester {
 		FacilityDto result = restTemplate.getForObject(url, FacilityDto.class);
 		return result;
 	}
-	
-	public static void putVehicule( VehiculeDto body) {
+
+	public static void putVehicule( VehiculeDto body, int id ) {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
@@ -61,18 +64,11 @@ public class Requester {
 
 		// Data attached to the request.
 		HttpEntity<VehiculeDto> requestBody = new HttpEntity<>(body, headers);
-		
-		System.out.println("oui");
 
 		// Send request with PUT method.
 		restTemplate.put(ConstantURL.getVehiculeurl(), requestBody, new Object[] {});
-		
-		System.out.println("oui");
-
 
 		String resourceUrl = ConstantURL.getVehiculeurl() + "/" + ConstantURL.teamCode + "/" + body.getId();
-		
-		System.out.println(resourceUrl);
 
 		String e = restTemplate.getForObject(resourceUrl, String.class);
 
@@ -80,4 +76,3 @@ public class Requester {
 	}
 
 }
-

@@ -10,7 +10,7 @@ public class mission {
 	private InterfaceVehicule vehicule;
 	private FireDto feu;
 	
-	mission(InterfaceVehicule v, FireDto f) {
+	public mission(InterfaceVehicule v, FireDto f) {
 		this.vehicule = v;
 		this.feu = f;
 	}

@@ -33,43 +33,25 @@ const map = new mapboxgl.Map({
 
 async function DisplayAll() {
     filterValue = "";
+    htmlValue = ""
     for (const obj of geojson) {
         if (obj.value == "fire") {
             filterValue = 'filter_red';
             urlIcon = 'media/img/point/fire.png';
-            /*htmlValue = `<h3>Fire ${feature.id}</h3>
-                        <ul>
-                            <li>
-                                <p>Fire type : ${feature.type}</p>
-                            </li>
-                            <li>
-                                <p>intensity : ${feature.intensity}</p>
-                            </li>
-                            <li>
-                                <p>range : ${feature.range}</p>
-                            </li>
-                        </ul>`;*/
         }
     
         else if (obj.value == "facility") {
             urlIcon = 'media/img/point/caserne.png';
-            /*htmlValue = `<h3>Fire ${feature.id}</h3>
-                        <ul>
-                            <li>
-                                <p>Fire type : ${feature.type}</p>
-                            </li>
-                            <li>
-                                <p>intensity : ${feature.intensity}</p>
-                            </li>
-                            <li>
-                                <p>range : ${feature.range}</p>
-                            </li>
-                        </ul>`;*/
         }
         else if (obj.value == "vehicule"){
             filterValue = 'filter_red';
             urlIcon = 'media/img/point/camion.png';
-            /*htmlValue = `<h3>Fire ${feature.list.id}</h3>
+        }
+        else { break; }
+        
+        for (const feature of obj.list) {
+            if(obj.value == "fire"){
+                htmlValue = `<h3>Fire ${feature.id}</h3>
                         <ul>
                             <li>
                                 <p>Fire type : ${feature.type}</p>
@@ -80,21 +62,48 @@ async function DisplayAll() {
                             <li>
                                 <p>range : ${feature.range}</p>
                             </li>
-                        </ul>`;*/
-        }
-        else { break; }
-
-        for (const feature of obj.list) {
-
+                        </ul>`;
+            }
             if (obj.value == "facility") {
+                htmlValue = `<h3>Caserne ${feature.id}</h3>
+                <ul>
+                    <li>
+                        <p> maxVehicleSpace : ${feature.maxVehicleSpace}</p>
+                    </li>
+                    <li>
+                        <p>peopleCapacity : ${feature.peopleCapacity}</p>
+                    </li>
+                    <li>
+                        <p>vehicleIdSet : ${feature.vehicleIdSet}</p>
+                    </li>
+                    <li>
+                        <p>peopleIdSet : ${feature.peopleIdSet}</p>
+                    </li>
+                </ul>`;
                 if ((feature.name).includes("Cas5")) {
                     filterValue = 'filter_green';
+                    
                 }
                 else {
                     filterValue = 'filter_gray';
                 }
             }
             if (obj.value == "vehicule") {
+                htmlValue = `<h3>${feature.type} ${feature.id}</h3>
+                        <ul>
+                            <li>
+                                <p> crewMember : ${feature.crewMember}</p>
+                            </li>
+                            <li>
+                                <p>fuel : ${feature.fuel}</p>
+                            </li>
+                            <li>
+                                <p>liquidQuantity : ${feature.liquidQuantity}</p>
+                            </li>
+                            <li>
+                                <p>liquidType : ${feature.liquidType}</p>
+                            </li>
+                        </ul>`;
                 if ((feature.facilityRefID) == 84) {
                     filterValue = 'filter_blue';
                 }
@@ -114,7 +123,7 @@ async function DisplayAll() {
                 .setPopup(
                     new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>Coucou</h3>`
+                        htmlValue
                     )
                 )
             .addTo(map);
