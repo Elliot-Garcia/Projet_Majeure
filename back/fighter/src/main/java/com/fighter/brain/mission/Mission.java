@@ -31,7 +31,7 @@ public class Mission implements InterfaceMission {
 	
 	@Override
 	public void missionAllerAuFeu(double lonFeu, double latFeu) {
-		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
+		//Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
 				vehicule.getVehiculeDto().getLat(),
 				feu.getLon(),
 				feu.getLon());
@@ -53,8 +53,8 @@ public class Mission implements InterfaceMission {
 		
 	}
 	
-	private void actuMission() {
+	//private void actuMission(Path path) {
 		
-	}
+	//}
 	
 }
