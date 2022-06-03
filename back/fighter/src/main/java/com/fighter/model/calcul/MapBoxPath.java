@@ -1,7 +1,8 @@
 package com.fighter.model.calcul;
 
-import org.json.simple.JSONObject;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class MapBoxPath {
 
@@ -10,11 +11,11 @@ public class MapBoxPath {
 	static final String MapBoxURL2 = "?geometries=geojson&access_token=pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg";
 	
 	
-	public static JSONObject requestMapBoxPath(double lon1, double lat1, double lon2, double lat2) {
+	public static JsonNode requestMapBoxPath(double lon1, double lat1, double lon2, double lat2) {
 		String url = MapBoxURL1 + "" + lon1 + "," + lat1 + ";" + lon2 + "," + lat2 + "" + MapBoxURL2;
 		System.out.println(url);
 		RestTemplate restTemplate = new RestTemplate();
-		JSONObject result = restTemplate.getForObject(url, JSONObject.class);
+		JsonNode result = restTemplate.getForObject(url, JsonNode.class);
 		return result;
 	}
 	
