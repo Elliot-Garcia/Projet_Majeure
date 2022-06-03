@@ -25,13 +25,16 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	public void missionFalse() {
 		this.mission = false;
 	}
+
+	@Override
+	public boolean getMission() {
+		return this.mission;
+	}
 	
 	@Override
 	public void deplacement(double lon, double lat) {
-		System.out.println("carAVD " + vehicule.getLon() + " " + vehicule.getLat());
 		this.vehicule.setLon(lon);
 		this.vehicule.setLat(lat);
-		System.out.println("carAPD " + vehicule.getLon() + " " + vehicule.getLat());
 		Requester.postVehicule(this.vehicule);
 	}
 

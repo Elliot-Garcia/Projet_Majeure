@@ -102,6 +102,12 @@ package Model <<Rectangle>> {
             distancePoint()
         }
 
+        class MapBoxPath {
+            static final String MapBoxURL1
+            static final String MapBoxURL2
+            + JSONObject requestMapBoxPath(double lon1, double lat1, double lon2, double lat2)
+        }
+
         class ConstantCalcul {
             - vitesseVehicule {km/h}
             - coeffKm2Coord
