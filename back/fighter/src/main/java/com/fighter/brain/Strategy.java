@@ -46,7 +46,9 @@ public class Strategy {
 		//Envoie vehicule et feu à la mission
 		InterfaceVehicule vehicule = new Vehicule(v);
 		Mission mission = new Mission(vehicule, fi);
+		System.out.println("debut ");
 		mission.debutMission();
+
 
 		return true;
 	}

@@ -16,14 +16,17 @@ public class Mission implements InterfaceMission {
 	}
 	
 	public void debutMission() {
+		this.vehicule.getVehiculeDto().setLat(this.feu.getLat());
+		this.vehicule.getVehiculeDto().setLon(this.feu.getLon());
 		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
-		Requester.putVehicule(this.vehicule.getVehiculeDto());
+		Requester.postVehicule(this.vehicule.getVehiculeDto());
+
 	}
 	
 	public void finMission() {
 		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLat());
 		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLon());
-		Requester.putVehicule(this.vehicule.getVehiculeDto());
+		Requester.postVehicule(this.vehicule.getVehiculeDto());
 	}
 	
 }
