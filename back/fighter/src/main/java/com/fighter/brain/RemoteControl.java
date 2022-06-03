@@ -36,9 +36,8 @@ public class RemoteControl {
 	 * @param newFire
 	 * @return
 	 */
-	public final boolean launchStrat( FireDto newFire) {
-
-				
+	private final boolean launchStrat( FireDto newFire) {
+		
 		
 		return true;
 	}
@@ -55,18 +54,20 @@ public class RemoteControl {
 		ret &= this.compareFire();
 		ret &= this.checkMissionedFire();
 		
-		
 		return(ret);	
 	}
 	
-	public boolean checkMissionedFire() {
-		for ( FireDto missonedFire : LogMission.fire) {
+	private boolean checkMissionedFire() {
+		boolean ret = false;
+		
+		LogMission.debutMission(new FireDto());
+		
+		for ( FireDto missonedFire : LogMission.getFire()) {
 			if (this.fire.contains(missonedFire)){
-				this.fire.remove(missonedFire);
+				ret |= this.fire.remove(missonedFire);
 			}
 		}
-		
-		return(true);
+		return ret;
 	}
 	
 	/**
@@ -129,7 +130,7 @@ public class RemoteControl {
 	}
 	
 	public String toString() {
-		return getClass().getSimpleName() +"\nFire: " + this.fire.size() + "\nVehicule: " + this.vehicule.size() + "\nFacilty: " + this.facility.length;
+		return getClass().getSimpleName() +"\nFire: " + this.fire.size() + "\nVehicule: " + this.vehicule.size() + "\nFacilty: " + this.facility.size();
 	}
 
 }
