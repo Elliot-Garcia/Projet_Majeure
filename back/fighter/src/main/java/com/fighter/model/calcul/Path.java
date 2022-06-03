@@ -32,23 +32,20 @@ public class Path {
 			double distance_deg = Math.sqrt(Math.pow(distance_lat,2)+Math.pow(distance_lon, 2));
 			System.out.println(distance_deg);
 			System.out.println(distance_metre);
-			double coeff = (distance_deg/0.001*distance_metre);
+			double coeff = (distance_deg/distance_metre);
 			System.out.println("coef" + coeff);
 		}
 		
 		 List<Double> newpoint = new ArrayList<Double>();
-		 //Coord depart = new Coord(this.debut_lon, this.debut_lat);
-		 //Coord arrivee = new Coord(this.arrivee_lon, this.arrivee_lat);
-		 //int distance = GisTools.computeDistance2(depart, arrivee);
-		//System.out.println("distance= "+ distance);
-		 
 		 System.out.println("Longi_deb = "+this.debut_lon+", Lat_deb = "+ this.debut_lat+", arrive_long= " + this.arrivee_lon + ", arriver_lat= "+this.arrivee_lat);
 		 double chemin_lat = debut_lat + distance_lat*ConstantCalcul.getCoeffkm2coord()*13.8889;
 		 double chemin_lon = debut_lon + distance_lon*ConstantCalcul.getCoeffkm2coord()*13.8889;
-			System.out.println(distance_lon);
-			System.out.println(arrivee_lat+0.1);
-		 if((chemin_lat >= arrivee_lat-0.1 && chemin_lat <= arrivee_lat+0.1) && (chemin_lon >= arrivee_lon-0.1 && chemin_lat <= arrivee_lon+0.1)) {
+		 
+		 	System.out.println(chemin_lat);
 
+		 	System.out.println(chemin_lon);
+
+		 if((chemin_lat >= arrivee_lat-0.01 && chemin_lat <= arrivee_lat+0.01) && (chemin_lon >= arrivee_lon-0.01 && chemin_lat <= arrivee_lon+0.01)) {
 			newpoint.add(debut_lon);
 		 	newpoint.add(debut_lat);
 		 	System.out.println("dans le feu");
@@ -86,22 +83,11 @@ public class Path {
 	
 	public static void main(String[] args)  {
 		Path p = new Path(5.0,46.0,4.0,45.0);
-		p.distancePoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-
-		p.pathNewPoint();
-
-		p.pathNewPoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-		p.pathNewPoint();
-
-		p.pathNewPoint();
-
+		
+		while(true) {
+			
+			p.pathNewPoint();
+		}
 
 	}
 	
