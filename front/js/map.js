@@ -33,6 +33,7 @@ const map = new mapboxgl.Map({
 
 async function DisplayAll() {
     filterValue = "";
+    htmlValue = ""
     for (const obj of geojson) {
         if (obj.value == "fire") {
             filterValue = 'filter_red';
@@ -83,18 +84,49 @@ async function DisplayAll() {
                         </ul>`;*/
         }
         else { break; }
-
+        
         for (const feature of obj.list) {
 
             if (obj.value == "facility") {
+                htmlValue = `<h3>Fire ${feature.id}</h3>
+                <ul>
+                    <li>
+                        <p> maxVehicleSpace : ${feature.maxVehicleSpace}</p>
+                    </li>
+                    <li>
+                        <p>peopleCapacity : ${feature.peopleCapacity}</p>
+                    </li>
+                    <li>
+                        <p>vehicleIdSet : ${feature.vehicleIdSet}</p>
+                    </li>
+                    <li>
+                        <p>peopleIdSet : ${feature.peopleIdSet}</p>
+                    </li>
+                </ul>`;
                 if ((feature.name).includes("Cas5")) {
                     filterValue = 'filter_green';
+                    
                 }
                 else {
                     filterValue = 'filter_gray';
                 }
             }
             if (obj.value == "vehicule") {
+                htmlValue = `<h3>Fire ${feature.id}</h3>
+                        <ul>
+                            <li>
+                                <p> crewMember : ${feature.crewMember}</p>
+                            </li>
+                            <li>
+                                <p>fuel : ${feature.fuel}</p>
+                            </li>
+                            <li>
+                                <p>liquidQuantity : ${feature.liquidQuantity}</p>
+                            </li>
+                            <li>
+                                <p>liquidType : ${feature.liquidType}</p>
+                            </li>
+                        </ul>`;
                 if ((feature.facilityRefID) == 84) {
                     filterValue = 'filter_blue';
                 }
@@ -114,7 +146,7 @@ async function DisplayAll() {
                 .setPopup(
                     new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3>Coucou</h3>`
+                        htmlValue
                     )
                 )
             .addTo(map);
