@@ -28,7 +28,8 @@ public class Vehicule extends AbstractVehicule {
 		}
 	
 	public static void main(String[] args) {
-		LiquidType liquidType;
+		LiquidType liquidType = LiquidType.WATER;
+		
 		System.out.println(liquidType);
 	}
 	

@@ -35,12 +35,6 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 
 	@Override
-	public boolean ravitaillement() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void gestionCrew() {
 		// TODO Auto-generated method stub
 
