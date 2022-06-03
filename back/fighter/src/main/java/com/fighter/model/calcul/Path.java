@@ -2,6 +2,7 @@ package com.fighter.model.calcul;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
@@ -26,12 +27,11 @@ public class Path {
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
-			int distance_metre = distancePoint();
+			int distance_metre = distancePoint(); //OK
 			distance_lat = arrivee_lat - debut_lat;
 			distance_lon = arrivee_lon - debut_lon;
 			double distance_deg = Math.sqrt(Math.pow(distance_lat,2)+Math.pow(distance_lon, 2));
 			System.out.println(distance_deg);
-			System.out.println(distance_metre);
 			double coeff = (distance_deg/distance_metre);
 			System.out.println("coef" + coeff);
 		}
@@ -40,25 +40,32 @@ public class Path {
 		 System.out.println("Longi_deb = "+this.debut_lon+", Lat_deb = "+ this.debut_lat+", arrive_long= " + this.arrivee_lon + ", arriver_lat= "+this.arrivee_lat);
 		 double chemin_lat = debut_lat + distance_lat*ConstantCalcul.getCoeffkm2coord()*13.8889;
 		 double chemin_lon = debut_lon + distance_lon*ConstantCalcul.getCoeffkm2coord()*13.8889;
-		 
-		 	System.out.println(chemin_lat);
+	
+		//TODO: faire avec la range des feux
+		 if((chemin_lat >= arrivee_lat-ConstantCalcul.getCoeffkm2coord()*50 && chemin_lat <= arrivee_lat+ConstantCalcul.getCoeffkm2coord()*50))  {
+			newpoint.add(this.debut_lat);
+		 	newpoint.add(this.debut_lon);
 
-		 	System.out.println(chemin_lon);
+			setDebut_lat(debut_lat);
+		 	setDebut_lon(debut_lon);
+			System.out.println("dans le feu2");
+		}
+		if((chemin_lon >= arrivee_lon-ConstantCalcul.getCoeffkm2coord()*50 && chemin_lon <= arrivee_lon+ConstantCalcul.getCoeffkm2coord()*50)) {
+		 	newpoint.add(this.debut_lon);
+			newpoint.add(this.debut_lat);
 
-		 if((chemin_lat >= arrivee_lat-0.01 && chemin_lat <= arrivee_lat+0.01) && (chemin_lon >= arrivee_lon-0.01 && chemin_lat <= arrivee_lon+0.01)) {
-			newpoint.add(debut_lon);
-		 	newpoint.add(debut_lat);
-		 	System.out.println("dans le feu");
+		 	setDebut_lon(debut_lon);
+		 	setDebut_lat(debut_lat);
+		 	System.out.println("dans le feu1");
 		}
 	 	else {
 	 		 newpoint.add(chemin_lon);
 			 newpoint.add(chemin_lat);
+			 setDebut_lon(chemin_lon);
+			 setDebut_lat(chemin_lat);
 			 System.out.println("go au feu");
 
 	 	}
-		
-		 setDebut_lon(chemin_lon);
-		 setDebut_lat(chemin_lat);
 		 
 		System.out.println("newpoint= "+ newpoint);
 		return newpoint;
@@ -81,11 +88,13 @@ public class Path {
 		return distance;
 	}
 	
-	public static void main(String[] args)  {
-		Path p = new Path(5.0,46.0,4.0,45.0);
-		
+	public static void main(String[] args) throws InterruptedException  {
+		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
+		p.pathNewPoint();
+
+
 		while(true) {
-			
+			TimeUnit.MILLISECONDS.sleep(1);
 			p.pathNewPoint();
 		}
 

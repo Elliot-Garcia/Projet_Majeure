@@ -30,7 +30,6 @@ const map = new mapboxgl.Map({
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
 
-
 async function DisplayAll() {
     filterValue = "";
     htmlValue = ""
