@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
 
@@ -18,6 +17,7 @@ public class Path {
 	
 	private double distance_lat = 0.0;
 	private double distance_lon = 0.0;	
+	private int i = 0;
 	
 	public Path(double debut_lon, double debut_lat, double arrivee_lon, double arrivee_lat) {
 		this.debut_lon = debut_lon;
@@ -27,19 +27,39 @@ public class Path {
 	}
 	
 
-	public boolean pathTest() {
+	public List<Double> pathTest() {
+		
 		MapBoxPath map = new MapBoxPath();
-		JSONObject json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
-		System.out.println(json);
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
+		JsonNode node = mapper.valueToTree(json);
+		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
+		System.out.println(list);
+		int taille = list.size();
+		List<Double> newpoint = new ArrayList<Double>();		
+		if(i<=taille) {
+			newpoint.add(list.get(i).get(0).asDouble());
+			newpoint.add(list.get(i).get(1).asDouble());
+			System.out.println(list.get(i).get(0).asDouble());
+			System.out.println(list.get(i).get(1).asDouble());
+			i+=1;
+			System.out.println(newpoint);
+		}else {
+			//Plus rien dans la liste à traiter, on renvoie de nouveau la derniere position
+			newpoint.add(list.get(taille).get(0).asDouble());
+			newpoint.add(list.get(taille).get(1).asDouble());
+		}
+		return newpoint;
+	}
+	/**
+	System.out.println(json);
 		JSONObject routes = (JSONObject) json.getJSONObject(json.get("routes"));
 		System.out.println(routes);
 		JSONObject geometry = (JSONObject) json.get("geometry");
 		System.out.println(geometry);
 		JSONObject coordinates = (JSONObject) json.get("coordinates");
 		System.out.println(geometry);
-		
-		return false;
-	}
+	*/
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
@@ -108,6 +128,7 @@ public class Path {
 		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
 		p.pathNewPoint();
 		p.pathTest();
+		p.pathTest();
 /**
 		while(true) {
 			TimeUnit.MILLISECONDS.sleep(1);
@@ -117,5 +138,12 @@ public class Path {
 	}
 	
 }
+
+
+	
+
+
+
+
 
 
