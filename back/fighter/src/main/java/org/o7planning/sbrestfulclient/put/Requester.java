@@ -1,4 +1,4 @@
-package com.fighter.model.communicator;
+package org.o7planning.sbrestfulclient.put;
 
 import org.springframework.web.client.RestTemplate;
 

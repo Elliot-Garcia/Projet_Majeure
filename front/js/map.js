@@ -126,7 +126,7 @@ async function DisplayAll() {
                                 <p>liquidType : ${feature.liquidType}</p>
                             </li>
                         </ul>`;
-                if ((feature.facilityRefID) == 84) {
+                if ((feature.facilityRefID) == 339) {
                     filterValue = 'filter_blue';
                 }
                 else {
