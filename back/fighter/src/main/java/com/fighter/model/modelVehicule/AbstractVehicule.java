@@ -2,6 +2,7 @@ package com.fighter.model.modelVehicule;
 
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
+import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 
 public abstract class AbstractVehicule implements InterfaceVehicule {
@@ -56,7 +57,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 		return facility;
 	}
 	
-	abstract public int Score();
+	abstract public int calculScore(FireDto fire, FacilityDto facility);
 	
 	@Override
 	public VehiculeDto getVehiculeDto() {
