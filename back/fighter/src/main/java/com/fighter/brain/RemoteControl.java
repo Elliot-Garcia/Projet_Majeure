@@ -1,7 +1,9 @@
 package com.fighter.brain;
 
 import java.util.Arrays;
+import java.util.List;
 
+import com.fighter.brain.mission.LogMission.LogMission;
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.DTOclass;
 import com.fighter.model.dto.FacilityDto;
@@ -14,9 +16,9 @@ import com.fighter.model.dto.VehiculeDto;
 
 public class RemoteControl {
 
-	private FireDto[] fire;
-	private VehiculeDto[] vehicule;
-	private FacilityDto[] facility;
+	private List<FireDto> fire;
+	private List<VehiculeDto> vehicule;
+	private List<FacilityDto> facility;
 	
 	private int[] newFire;
 	
@@ -24,8 +26,8 @@ public class RemoteControl {
 	public RemoteControl() {
 
 		//this.fire = Requester.requestFire();
-		this.vehicule = Requester.requestVehicule();
-		this.facility = Requester.requestFacility();
+		this.vehicule = Arrays.asList(Requester.requestVehicule());
+		this.facility = Arrays.asList(Requester.requestFacility());
 	}
 	
 	
@@ -37,7 +39,7 @@ public class RemoteControl {
 	public final boolean launchStrat( FireDto newFire) {
 		//lucnhe strat
 		//new strategie( newFire  );
-		
+		LogMission
 		System.out.println("New strat");
 		new Strategy( newFire ,this.facility, this.vehicule).calculScore(newFire ,this.facility, this.vehicule);
 		
@@ -54,8 +56,20 @@ public class RemoteControl {
 		this.editFacility();
 		this.editVehicule();
 		ret &= this.compareFire();
+		ret &= this.checkMissionedFire();
+		
 		
 		return(ret);	
+	}
+	
+	public boolean checkMissionedFire() {
+		for ( FireDto missonedFire : LogMission.fire) {
+			if (Arrays.asList(this.fire).contains(missonedFire)){
+				Arrays.asList(this.fire
+			}
+		}
+		
+		return(true);
 	}
 	
 	/**
@@ -106,7 +120,7 @@ public class RemoteControl {
 	 * @return true
 	 */
 	private boolean editVehicule() {
-		this.vehicule = Requester.requestVehicule();
+		this.vehicule = Arrays.asList(Requester.requestVehicule());
 		return true;
 	}
 	
@@ -115,12 +129,12 @@ public class RemoteControl {
 	 * @return true
 	 */
 	private boolean editFacility() {
-		this.facility = Requester.requestFacility();
+		this.facility = Arrays.asList(Requester.requestFacility());
 		return true;
 	}
 	
 	public String toString() {
-		return getClass().getSimpleName() +"\nFire: " + this.fire.length + "\nVehicule: " + this.vehicule.length + "\nFacilty: " + this.facility.length;
+		return getClass().getSimpleName() +"\nFire: " + this.fire.size() + "\nVehicule: " + this.vehicule.size() + "\nFacilty: " + this.facility.length;
 	}
 
 }
