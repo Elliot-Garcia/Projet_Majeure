@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
+import net.minidev.json.JSONObject;
 
 public class Path {
 	private double debut_lon;
@@ -24,6 +25,15 @@ public class Path {
 	}
 	
 
+	public boolean pathTest() {
+		MapBoxPath map = new MapBoxPath();
+		JSONObject json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
+		System.out.println(json);
+		
+		System.out.println(json.get(String.valueOf("routes")));
+		
+		return false;
+	}
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
@@ -91,13 +101,13 @@ public class Path {
 	public static void main(String[] args) throws InterruptedException  {
 		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
 		p.pathNewPoint();
-
-
+		p.pathTest();
+/**
 		while(true) {
 			TimeUnit.MILLISECONDS.sleep(1);
 			p.pathNewPoint();
 		}
-
+*/
 	}
 	
 }
