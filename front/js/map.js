@@ -63,6 +63,28 @@ async function DisplayAll() {
                                 <p>range : ${feature.range}</p>
                             </li>
                         </ul>`;
+                       
+                if ((feature.type) == "A") {
+                    filterValue = 'filter_green';
+                        
+                } else if ((feature.type) == "B_Gasoline") {
+                    filterValue = 'filter_gray';
+                    
+                } else if ((feature.type) == "B_Alcohol") {
+                    filterValue = 'filter_red';
+                    
+                } else if ((feature.type) == "B_Plastics") {
+                    filterValue = 'filter_yellow';
+                    
+                } else if ((feature.type) == "C_Flammable_Gases") {
+                    filterValue = 'filter_black';
+                    
+                } else if ((feature.type) == "D_Metals") {
+                    filterValue = 'filter_blue';
+                    
+                } else if ((feature.type) == "E_Electric") {
+                    filterValue = 'filter_pink';    
+                } 
             }
             if (obj.value == "facility") {
                 htmlValue = `<h3>Caserne ${feature.id}</h3>
@@ -81,11 +103,11 @@ async function DisplayAll() {
                     </li>
                 </ul>`;
                 if ((feature.name).includes("Cas5")) {
-                    filterValue = 'filter_green';
+                    filterValue = 'filter_blue';
                     
                 }
                 else {
-                    filterValue = 'filter_gray';
+                    filterValue = 'filter_black';
                 }
             }
             if (obj.value == "vehicule") {
@@ -108,7 +130,7 @@ async function DisplayAll() {
                     filterValue = 'filter_blue';
                 }
                 else {
-                    filterValue = 'filter_gray';
+                    filterValue = 'filter_black';
                 }
             }
                 console.log(filterValue);
