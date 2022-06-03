@@ -77,6 +77,11 @@ package Model <<Rectangle>> {
         package BlocMission <<rectangle>> {
             class Mission {
             }
+
+            class LogMission {
+                - List<FireDto> missionEnCours
+                @getter() 
+            }
         }
 
         RemoteControl -> BlocAffectation

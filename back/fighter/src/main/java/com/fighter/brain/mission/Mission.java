@@ -1,5 +1,6 @@
 package com.fighter.brain.mission;
 
+import com.fighter.model.calcul.Path;
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
@@ -17,26 +18,32 @@ public class Mission implements InterfaceMission {
 	
 	public void debutMission() {
 		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
+		this.vehicule.missionTrue();
 	}
 	
 	public void finMission() {
-		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLat());
-		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLon());
+		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacility().getLat());
+		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacility().getLon());
+		this.vehicule.missionFalse();
 		Requester.postVehicule(this.vehicule.getVehiculeDto());
 	}
 	
 	@Override
 	public void missionAllerAuFeu(double lonFeu, double latFeu) {
-		/*Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
+		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
 				vehicule.getVehiculeDto().getLat(),
 				feu.getLon(),
-				feu.getLon());*/
+				feu.getLon());
+		this.vehicule.missionTrue();
 		
 	}
 	
 	@Override
 	public void missionRavitaillementEssence(double lonRav, double latRav) {
-		
+		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
+				vehicule.getVehiculeDto().getLat(),
+				vehicule.findFacility().getLon(),
+				vehicule.findFacility().getLat());
 	}
 	
 	@Override
@@ -46,7 +53,7 @@ public class Mission implements InterfaceMission {
 	
 	@Override
 	public void missionAnnule() {
-		
+		this.vehicule.missionFalse();
 	}
 	
 	//private void actuMission(Path path) {

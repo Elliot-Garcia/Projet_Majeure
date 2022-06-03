@@ -7,9 +7,21 @@ import com.fighter.model.dto.VehiculeDto;
 public abstract class AbstractVehicule implements InterfaceVehicule {
 	
 	protected VehiculeDto vehicule;
+	protected boolean mission;
 	
 	AbstractVehicule() {
 		this.vehicule = new VehiculeDto();
+		this.mission = false;
+	}
+	
+	@Override
+	public void missionTrue() {
+		this.mission = true;
+	}
+	
+	@Override
+	public void missionFalse() {
+		this.mission = false;
 	}
 	
 	@Override
@@ -33,8 +45,12 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 
 	}
 	
-	@Override
-	public FacilityDto findFacilityById(int id) {
+	@Override 
+	public FacilityDto findFacility() {
+		return findFacilityById(this.vehicule.getFacilityRefID());
+	}
+	
+	private FacilityDto findFacilityById(int id) {
 		int idFacility = this.vehicule.getFacilityRefID();
 		FacilityDto facility = Requester.requestFacilityByID(idFacility);
 		return facility;

@@ -10,6 +10,7 @@ public class Vehicule extends AbstractVehicule {
 	public Vehicule(VehiculeDto v) {
 		super();
 		this.vehicule = v;
+		this.mission = false;
 	}
 
 	@Override
