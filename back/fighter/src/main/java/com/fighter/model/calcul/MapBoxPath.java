@@ -2,10 +2,6 @@ package com.fighter.model.calcul;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.fighter.model.communicator.ConstantURL;
-import com.fighter.model.dto.FireDto;
-import com.fighter.model.dto.LiquidType;
-
 import net.minidev.json.JSONObject;
 
 public class MapBoxPath {
