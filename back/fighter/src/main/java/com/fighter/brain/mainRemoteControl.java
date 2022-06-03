@@ -7,6 +7,8 @@ public class mainRemoteControl {
 	public static void main(String[] args) {
 		remoteControl ctr = new remoteControl();
 		
+		
+		
 		while(true) {
 			
 			ctr.compare();

@@ -8,7 +8,7 @@ import com.fighter.model.dto.VehiculeDto;
 
 public abstract class AbstractVehicule implements InterfaceVehicule {
 	
-	private VehiculeDto vehicule;
+	protected VehiculeDto vehicule;
 	
 	AbstractVehicule() {
 		this.vehicule = new VehiculeDto();

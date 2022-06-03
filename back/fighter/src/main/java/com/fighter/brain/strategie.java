@@ -1,8 +1,13 @@
 package com.fighter.brain;
 
+import com.fighter.brain.mission.mission;
+import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
+import com.fighter.model.modelVehicule.InterfaceVehicule;
+import com.fighter.model.modelVehicule.Vehicule;
+
 
 public class strategie {
 	private FireDto feu;
@@ -22,7 +27,7 @@ public class strategie {
 		for(int i = 0; i<v.length; i++) {
 			if (v[i].getFacilityRefID() == 84) {
 				//calcul score
-				if(score>20) {
+				if(score>10) {
 					launchMission(v[i], fi);
 					break; //Pour le moment, en lancer qu'un seul
 				}
@@ -39,6 +44,10 @@ public class strategie {
 	public boolean launchMission(VehiculeDto v, FireDto fi) {
 		//mission(v, fi); //Voir la fonction à appeler
 		//Envoie vehicule et feu à la mission
+		InterfaceVehicule vehicule = new Vehicule(v);
+		mission mission = new mission(vehicule, fi);
+		mission.debutMission();
+
 		return true;
 	}
 }
