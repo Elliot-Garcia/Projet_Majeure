@@ -48,29 +48,34 @@ public class Strategy {
 	
 	public boolean assignVehicule() {
 		
-		Map<Integer, Vehicule> max = new HashMap<Integer, Vehicule>();
-		Map<Integer, Vehicule> vehiculePair = new HashMap<Integer, Vehicule>();
+		int max = 0;
+		Vehicule vehiculeMax = null;
 
 		for ( Vehicule vehicule : this.ownVehicule ) {
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
 			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
+			System.out.println(score);
 			
-			vehiculePair.put(score, vehicule);
-			
-			max.put( max, Math.max((int) vehiculePair.setKey(), max.keySet()));
-			
+			if (score > max) {
+				max = score;
+				vehiculeMax = vehicule;
+			}
 		}
+		System.out.println(vehiculeMax);
+		if (vehiculeMax != null) {
+			 this.launchMission(vehiculeMax.getVehiculeDto(), feu);
+			 return(true);
+		}
+		return false;
 	}
 	
 	private boolean launchMission(VehiculeDto v, FireDto fi) {
 		//mission(v, fi); //Voir la fonction à appeler
 		//Envoie vehicules et feu à la mission
 		InterfaceVehicule vehicules = new Vehicule(v);
-		System.out.println("fire " + fi.getLon() + " " + fi.getLat());
-		System.out.println("car " + v.getLon() + " " + v.getLat());
 		
 		Mission mission = new Mission(vehicules, fi);
-		System.out.println("debut ");
+		System.out.println("debut Mission");
 		mission.debutMission();
 
 
