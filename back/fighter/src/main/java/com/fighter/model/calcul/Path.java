@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
-import net.minidev.json.JSONObject;
 
 public class Path {
 	private double debut_lon;
@@ -29,8 +31,12 @@ public class Path {
 		MapBoxPath map = new MapBoxPath();
 		JSONObject json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
 		System.out.println(json);
-		
-		System.out.println(json.get(String.valueOf("routes")));
+		JSONObject routes = (JSONObject) json.getJSONObject(json.get("routes"));
+		System.out.println(routes);
+		JSONObject geometry = (JSONObject) json.get("geometry");
+		System.out.println(geometry);
+		JSONObject coordinates = (JSONObject) json.get("coordinates");
+		System.out.println(geometry);
 		
 		return false;
 	}

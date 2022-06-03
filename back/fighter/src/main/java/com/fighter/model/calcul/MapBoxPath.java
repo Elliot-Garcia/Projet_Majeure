@@ -1,8 +1,7 @@
 package com.fighter.model.calcul;
 
+import org.json.simple.JSONObject;
 import org.springframework.web.client.RestTemplate;
-
-import net.minidev.json.JSONObject;
 
 public class MapBoxPath {
 
