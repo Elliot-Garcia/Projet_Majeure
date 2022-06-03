@@ -2,7 +2,6 @@ package com.fighter.model.calcul;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import com.project.model.dto.Coord;
 import com.project.tools.GisTools;
@@ -27,8 +26,14 @@ public class Path {
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
+			int distance_metre = distancePoint();
 			distance_lat = arrivee_lat - debut_lat;
 			distance_lon = arrivee_lon - debut_lon;
+			double distance_deg = Math.sqrt(Math.pow(distance_lat,2)+Math.pow(distance_lon, 2));
+			System.out.println(distance_deg);
+			System.out.println(distance_metre);
+			double coeff = (distance_deg/0.001*distance_metre);
+			System.out.println("coef" + coeff);
 		}
 		
 		 List<Double> newpoint = new ArrayList<Double>();
@@ -38,8 +43,8 @@ public class Path {
 		//System.out.println("distance= "+ distance);
 		 
 		 System.out.println("Longi_deb = "+this.debut_lon+", Lat_deb = "+ this.debut_lat+", arrive_long= " + this.arrivee_lon + ", arriver_lat= "+this.arrivee_lat);
-		 double chemin_lat = debut_lat + distance_lat*ConstantCalcul.coeffKm2Coord;
-		 double chemin_lon = debut_lon + distance_lon*ConstantCalcul.coeffKm2Coord;
+		 double chemin_lat = debut_lat + distance_lat*ConstantCalcul.getCoeffkm2coord()*13.8889;
+		 double chemin_lon = debut_lon + distance_lon*ConstantCalcul.getCoeffkm2coord()*13.8889;
 			System.out.println(distance_lon);
 			System.out.println(arrivee_lat+0.1);
 		 if((chemin_lat >= arrivee_lat-0.1 && chemin_lat <= arrivee_lat+0.1) && (chemin_lon >= arrivee_lon-0.1 && chemin_lat <= arrivee_lon+0.1)) {
@@ -80,7 +85,7 @@ public class Path {
 	}
 	
 	public static void main(String[] args)  {
-		Path p = new Path(4.8,45.7,4.81,45.78);
+		Path p = new Path(5.0,46.0,4.0,45.0);
 		p.distancePoint();
 		p.pathNewPoint();
 		p.pathNewPoint();
