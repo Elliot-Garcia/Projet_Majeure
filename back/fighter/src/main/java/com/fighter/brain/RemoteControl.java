@@ -37,11 +37,8 @@ public class RemoteControl {
 	 * @return
 	 */
 	public final boolean launchStrat( FireDto newFire) {
-		//lucnhe strat
-		//new strategie( newFire  );
-		LogMission
-		System.out.println("New strat");
-		new Strategy( newFire ,this.facility, this.vehicule).calculScore(newFire ,this.facility, this.vehicule);
+
+				
 		
 		return true;
 	}
@@ -64,8 +61,8 @@ public class RemoteControl {
 	
 	public boolean checkMissionedFire() {
 		for ( FireDto missonedFire : LogMission.fire) {
-			if (Arrays.asList(this.fire).contains(missonedFire)){
-				Arrays.asList(this.fire
+			if (this.fire.contains(missonedFire)){
+				this.fire.remove(missonedFire);
 			}
 		}
 		
@@ -77,12 +74,10 @@ public class RemoteControl {
 	 * @param two DTOclass[]
 	 * @return true if equals, false else
 	 */
-	private boolean compareData(DTOclass[] pastData, DTOclass[] newData) {
-
+	private boolean compareData( List<FireDto> pastData, List<FireDto> newData) {
 		if (newData.equals(pastData)) {
 			return true;
 		}
-
 		return false;
 	}
 	
@@ -93,7 +88,7 @@ public class RemoteControl {
 	 */
 	private boolean compareFire() {
 		boolean ret = false;
-		FireDto[] newFire = Requester.requestFire();
+		List<FireDto> newFire = Arrays.asList(Requester.requestFire());
 		
 		if (this.fire == null) {
 			for ( FireDto someFire : newFire) {
@@ -105,7 +100,7 @@ public class RemoteControl {
 			System.out.println(this.fire);
 			for ( FireDto someFire : newFire) {
 				
-				if(Arrays.asList(this.fire).contains(someFire)) {
+				if(this.fire.contains(someFire)) {
 					this.launchStrat( someFire );
 					ret = true;
 				}
