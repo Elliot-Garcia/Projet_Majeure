@@ -79,6 +79,10 @@ package Model <<Rectangle>> {
             }
         }
 
+        class Path {
+            + Path(Coord dep, Coord arr)
+        }
+
         RemoteControl -> BlocAffectation
         Strategy -> BlocMission
 
