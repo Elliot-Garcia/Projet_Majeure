@@ -29,4 +29,32 @@ public class Mission implements InterfaceMission {
 		Requester.postVehicule(this.vehicule.getVehiculeDto());
 	}
 	
+	@Override
+	public void missionAllerAuFeu(double lonFeu, double latFeu) {
+		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
+				vehicule.getVehiculeDto().getLat(),
+				feu.getLon(),
+				feu.getLon());
+		
+	}
+	
+	@Override
+	public void missionRavitaillementEssence(double lonRav, double latRav) {
+		
+	}
+	
+	@Override
+	public void missionRavitaillementExtincteur(double lonRav, double latRav) {
+		
+	}
+	
+	@Override
+	public void missionAnnule() {
+		
+	}
+	
+	private void actuMission() {
+		
+	}
+	
 }
