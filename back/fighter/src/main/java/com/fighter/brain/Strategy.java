@@ -25,9 +25,9 @@ public class Strategy {
 		int score = 20;
 		String type_feu = fi.getType();
 		for(int i = 0; i<v.length; i++) {
-			if (v[i].getFacilityRefID() == 84) {
+			if (v[i].getFacilityRefID() == 339) {
 				//calcul score
-				if(score>10) {
+				if(score>0) {
 					launchMission(v[i], fi);
 					break; //Pour le moment, en lancer qu'un seul
 				}
@@ -45,6 +45,9 @@ public class Strategy {
 		//mission(v, fi); //Voir la fonction à appeler
 		//Envoie vehicule et feu à la mission
 		InterfaceVehicule vehicule = new Vehicule(v);
+		System.out.println("fire " + fi.getLon() + " " + fi.getLat());
+		System.out.println("car " + v.getLon() + " " + v.getLat());
+		
 		Mission mission = new Mission(vehicule, fi);
 		System.out.println("debut ");
 		mission.debutMission();

@@ -16,11 +16,7 @@ public class Mission implements InterfaceMission {
 	}
 	
 	public void debutMission() {
-		this.vehicule.getVehiculeDto().setLat(this.feu.getLat());
-		this.vehicule.getVehiculeDto().setLon(this.feu.getLon());
 		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
-		Requester.postVehicule(this.vehicule.getVehiculeDto());
-
 	}
 	
 	public void finMission() {
@@ -31,10 +27,10 @@ public class Mission implements InterfaceMission {
 	
 	@Override
 	public void missionAllerAuFeu(double lonFeu, double latFeu) {
-		//Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
+		/*Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
 				vehicule.getVehiculeDto().getLat(),
 				feu.getLon(),
-				feu.getLon());
+				feu.getLon());*/
 		
 	}
 	
