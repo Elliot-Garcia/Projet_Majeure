@@ -37,7 +37,7 @@ public class RemoteControl {
 	 * @return
 	 */
 	private final boolean launchStrat( FireDto newFire) {
-		
+		new Strategy( newFire, this.facility, this.vehicule).assignVehicule();
 		
 		return true;
 	}
