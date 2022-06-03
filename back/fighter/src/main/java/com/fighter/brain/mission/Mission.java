@@ -18,13 +18,13 @@ public class Mission {
 	public void debutMission() {
 		this.vehicule.getVehiculeDto().setLat(this.feu.getLat());
 		this.vehicule.getVehiculeDto().setLon(this.feu.getLon());
-		Requester.putVehicule(this.vehicule.getVehiculeDto());
+		Requester.postVehicule(this.vehicule.getVehiculeDto());
 	}
 	
 	public void finMission() {
 		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLat());
 		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacilityById(this.vehicule.getVehiculeDto().getFacilityRefID()).getLon());
-		Requester.putVehicule(this.vehicule.getVehiculeDto());
+		Requester.postVehicule(this.vehicule.getVehiculeDto());
 	}
 	
 }

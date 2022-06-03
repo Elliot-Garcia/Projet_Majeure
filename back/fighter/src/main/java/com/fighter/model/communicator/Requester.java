@@ -52,31 +52,19 @@ public class Requester {
 		return result;
 	}
 	
-	public static void putVehicule( VehiculeDto body) {
-
+	public static void postVehicule( VehiculeDto info) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+	    headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+	    headers.setContentType(MediaType.APPLICATION_JSON);
 
-		RestTemplate restTemplate = new RestTemplate();
+	    RestTemplate restTemplate = new RestTemplate();
 
-		// Data attached to the request.
-		HttpEntity<VehiculeDto> requestBody = new HttpEntity<>(body, headers);
-		
-		System.out.println("oui");
+	    // Data attached to the request.
+	    HttpEntity<VehiculeDto> requestBody = new HttpEntity<>(info, headers);
 
-		// Send request with PUT method.
-		restTemplate.put(ConstantURL.getVehiculeurl(), requestBody, new Object[] {});
-		
-		System.out.println("oui");
-
-
-		String resourceUrl = ConstantURL.getVehiculeurl() + "/" + ConstantURL.teamCode + "/" + body.getId();
-		
-		System.out.println(resourceUrl);
-
-		String e = restTemplate.getForObject(resourceUrl, String.class);
-
-		System.out.println(e);
+	    // Send request with POST method.
+	    String url = ConstantURL.getVehiculeurl() + ConstantURL.teamCode;
+	    String e = restTemplate.postForObject(url, requestBody, String.class);
 	}
 
 
