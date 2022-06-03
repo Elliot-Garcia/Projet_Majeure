@@ -5,7 +5,7 @@ import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public class Mission {
+public class Mission implements InterfaceMission {
 
 	private InterfaceVehicule vehicule;
 	private FireDto feu;
