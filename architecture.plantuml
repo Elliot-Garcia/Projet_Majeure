@@ -91,9 +91,15 @@ package Model <<Rectangle>> {
 
     package BlocCalcul <<Folder>> {
         class Path {
-            - Coord depart
-            - Coord arrivee
-            + Path(Coord dep, Coord arr)
+            - double depart_lat
+            - double depart_lon
+            - double arrivee_lat
+            - double arrivee_lon
+            + Path(double dep_lat,double dep_lon,double arr_lat,double arr_lon)
+            pathNewPoint()
+            setDebut_lon()
+            setDebut_lat()
+            distancePoint()
         }
 
         class ConstantCalcul {
