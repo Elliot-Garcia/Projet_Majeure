@@ -1,5 +1,6 @@
 package com.fighter.model.modelVehicule;
 
+import com.fighter.model.calcul.Path;
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
@@ -35,12 +36,6 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 
 	@Override
-	public boolean ravitaillement() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void gestionCrew() {
 		// TODO Auto-generated method stub
 
@@ -57,7 +52,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 		return facility;
 	}
 	
-	abstract public int calculScore(FireDto fire, FacilityDto facility);
+	abstract public int calculScore(FireDto fire, FacilityDto facility, Path path);
 	
 	@Override
 	public VehiculeDto getVehiculeDto() {
