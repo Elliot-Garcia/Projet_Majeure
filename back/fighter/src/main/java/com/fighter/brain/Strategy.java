@@ -24,50 +24,43 @@ public class Strategy {
 	private FireDto feu;
 	private List<FacilityDto> caserne;
 	private List<VehiculeDto> vehicules;
-	private List<Vehicule> ownVehicule;
-	
+
 	
 	public Strategy(FireDto feu, List<FacilityDto> casernes, List<VehiculeDto> vehicules) {
 		this.caserne = caserne; 
 		this.feu = feu;
 		this.vehicules = vehicules;
-		this.initOwnVehicle();
-	}
-	
-	private void initOwnVehicle() {
-
-		this.ownVehicule = new ArrayList();
-		for ( VehiculeDto vehiculeDto : this.vehicules ) {
-			if( ConstantsModel.getListFacility().contains( vehiculeDto.getFacilityRefID() ) ) {
-				Vehicule vehicule = new Vehicule(vehiculeDto);
-				ownVehicule.add(vehicule);
-			}
-		}
 	}
 		
 	
 	public boolean assignVehicule() {
 		
+		System.out.println("++++++++++++ New assignement +++++++++++++++");
+		
 		int max = -1;
 		Vehicule vehiculeMax = null;
 		
-		System.out.println("Our car : " + ownVehicule.size() + "__________________________________________");
-		for ( Vehicule vehicule : this.ownVehicule ) {
+		for ( Vehicule vehicule : LogMission.ownVehicule ) {
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
 			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
 			System.out.println("Score :" + score);
-			System.out.println("Bussy :" + vehicule.getMission());
+			System.out.println("Busy :" + vehicule.getMission() + " " + vehicule);
 			
-			if (score > max && vehicule.getMission()) {
+			
+		
+			if (score > max && !vehicule.getMission()) {
 				max = score;
 				vehiculeMax = vehicule;
 			}
 		}
-		System.out.println("Our car : " + ownVehicule.size() + "__________________________________________");
+		
 		if (vehiculeMax != null) {
-			 this.launchMission(vehiculeMax.getVehiculeDto(), feu);
-			 return(true);
+			vehiculeMax.missionTrue();
+			this.launchMission(vehiculeMax.getVehiculeDto(), feu);
+			System.out.println("------------------------- MISSION --------------------------------");
+			return(true);
 		}
+		System.out.println("------------------------- NO MISSION --------------------------------");
 		return false;
 	}
 	
@@ -77,7 +70,7 @@ public class Strategy {
 		InterfaceVehicule vehicules = new Vehicule(v);
 		
 		Mission mission = new Mission(vehicules, fi);
-		System.out.println("debut Mission");
+		System.out.println("-- Debut Mission --");
 		mission.debutMission();
 
 
