@@ -17,8 +17,8 @@ public class Mission implements InterfaceMission, Runnable {
 	}
 	
 	public void debutMission() {
-		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
 		this.vehicule.missionTrue();
+		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
 	}
 	
 	public void finMission() {
@@ -35,7 +35,6 @@ public class Mission implements InterfaceMission, Runnable {
 				feu.getLon(),
 				feu.getLon());
 		this.vehicule.missionTrue();
-		
 	}
 	
 	@Override
@@ -59,8 +58,17 @@ public class Mission implements InterfaceMission, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("** Je suis un thread **__" + this.vehicule);
-		System.out.println("-- Debut Mission --");
+		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule.getVehiculeDto());
+		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule);
+		this.debutMission();
+		
+		while ( Requester.requestFireByID( this.feu.getId()).equals(null) )  {
+			System.out.println("[Thread]-- Turn()");
+		}
+		
+		this.finMission();
+		
+		
 	}
 	
 	//private void actuMission(Path path) {

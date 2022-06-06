@@ -11,10 +11,7 @@ public class mainRemoteControl {
 		RemoteControl ctr = new RemoteControl();
 		
 		LogMission.initOwnVehicle(Arrays.asList(Requester.requestVehicule()));
-		
-		System.out.println("OK");
-		
-		
+				
 		while(true) {
 			
 			ctr.compare();

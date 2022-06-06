@@ -50,8 +50,7 @@ public class Strategy {
 		}
 		
 		if (vehiculeMax != null) {
-			vehiculeMax.missionTrue();
-			this.launchMission(vehiculeMax.getVehiculeDto(), feu);
+			this.launchMission(vehiculeMax, feu);
 			System.out.println("------------------------- MISSION --------------------------------");
 			return(true);
 		}
@@ -59,13 +58,13 @@ public class Strategy {
 		return false;
 	}
 	
-	private boolean launchMission(VehiculeDto v, FireDto fi) {
+	private boolean launchMission(Vehicule v, FireDto fi) {
 
-		InterfaceVehicule vehicules = new Vehicule(v);
+
 		System.out.println("-- Debut Mission --");
 	
 		//Create a Runnable is charge of executing cyclic actions 
-		Mission mission = new Mission(vehicules, fi);
+		Mission mission = new Mission(v, fi);
 				
 		// A Runnable is held by a Thread which manage lifecycle of the Runnable
 		Thread thread  = new Thread(mission);
