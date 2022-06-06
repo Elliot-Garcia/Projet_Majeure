@@ -35,7 +35,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	public void deplacement(double lon, double lat) {
 		this.vehicule.setLon(lon);
 		this.vehicule.setLat(lat);
-		Requester.postVehicule(this.vehicule);
+		Requester.putVehicule(this.vehicule);
 	}
 
 	@Override

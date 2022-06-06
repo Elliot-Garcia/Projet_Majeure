@@ -25,7 +25,7 @@ public class Mission implements InterfaceMission, Runnable {
 		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacility().getLat());
 		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacility().getLon());
 		this.vehicule.missionFalse();
-		Requester.postVehicule(this.vehicule.getVehiculeDto());
+		Requester.putVehicule(this.vehicule.getVehiculeDto());
 	}
 	
 	@Override
@@ -64,13 +64,18 @@ public class Mission implements InterfaceMission, Runnable {
 		
 		while ( Requester.requestFireByID( this.feu.getId()).equals(null) )  {
 			System.out.println("[Thread]-- Turn()");
+			
+			try {
+			    Thread.sleep(750);
+			} catch(InterruptedException e) {
+			    System.out.println("got interrupted!");
+			}
 		}
 		
 		this.finMission();
-		
-		
+		System.out.println("[ Thread ]" + "-- Fin Mission --" + this.vehicule);
 	}
-	
+
 	//private void actuMission(Path path) {
 		
 	//}

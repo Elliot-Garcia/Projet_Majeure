@@ -52,13 +52,6 @@ public class Requester {
 		return result;
 	}
 	
-
-	public static void postVehicule( VehiculeDto info) {
-		
-		putVehicule(info);
-		return;
-
-	}
 	
 	public static void putVehicule( VehiculeDto info) {
 		HttpHeaders headers = new HttpHeaders();

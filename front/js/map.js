@@ -17,7 +17,7 @@ async function Start(){
     geojson[0].list = await getFire();
     geojson[1].list = await GetFacilities();
     geojson[2].list = await GetVehicle();
-    console.log(geojson)
+    console.log(geojson);
     DisplayAll();
 }
 
