@@ -3,6 +3,7 @@ package com.fighter.brain;
 import java.util.List;
 
 import com.fighter.brain.mission.Mission;
+import com.fighter.brain.mission.MissionFeu;
 import com.fighter.brain.mission.LogMission.LogMission;
 import com.fighter.model.calcul.Path;
 import com.fighter.model.dto.FacilityDto;
@@ -22,7 +23,7 @@ public class Strategy {
 
 	
 	public Strategy(FireDto feu, List<FacilityDto> casernes, List<VehiculeDto> vehicules) {
-		this.caserne = caserne; 
+		this.caserne = casernes; 
 		this.feu = feu;
 		this.vehicules = vehicules;
 	}
@@ -64,7 +65,7 @@ public class Strategy {
 		System.out.println("-- Debut Mission --");
 	
 		//Create a Runnable is charge of executing cyclic actions 
-		Mission mission = new Mission(v, fi);
+		Mission mission = new MissionFeu(v, fi.getLon(), fi.getLat(),fi);
 				
 		// A Runnable is held by a Thread which manage lifecycle of the Runnable
 		Thread thread  = new Thread(mission);

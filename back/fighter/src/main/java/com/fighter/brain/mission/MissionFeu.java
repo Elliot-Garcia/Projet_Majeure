@@ -11,11 +11,11 @@ public class MissionFeu extends Mission {
 	private FireDto feu;
 	private Path chemin;
 	
-	MissionFeu(InterfaceVehicule v, double lonDestination, double latDestination, FireDto f) {
+	public MissionFeu(InterfaceVehicule v, double lonDestination, double latDestination, FireDto f) {
 		super(v, lonDestination, latDestination);
 	}
 	
-	public boolean missionContinue() {
+	protected boolean missionContinue() {
 		return Requester.requestFireByID( this.feu.getId()).equals(null);
 	}
 

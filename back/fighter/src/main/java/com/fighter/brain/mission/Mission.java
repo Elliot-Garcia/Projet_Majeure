@@ -6,7 +6,7 @@ import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public abstract class Mission implements InterfaceMission, Runnable {
+public abstract class Mission implements Runnable {
 
 	private InterfaceVehicule vehicule;
 	private Path chemin;
@@ -54,7 +54,7 @@ public abstract class Mission implements InterfaceMission, Runnable {
 			
 			try {
 				this.missionDeplacement();
-			    Thread.sleep(750);
+			    Thread.sleep(this.deltaTemps);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
 			}
