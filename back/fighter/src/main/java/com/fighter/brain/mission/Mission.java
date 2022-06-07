@@ -45,12 +45,11 @@ public abstract class Mission implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule.getVehiculeDto());
-		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule);
+		System.out.println("[ Thread ] " + "-- Debut Mission -- " + this.vehicule.getVehiculeDto().getId());
 		this.missionStart();
 		
 		while ( this.missionContinue() )  {
-			System.out.println("[Thread]-- Turn()");
+			System.out.println("[Thread] -- Turn()");
 			
 			try {
 				this.missionDeplacement();
@@ -61,7 +60,7 @@ public abstract class Mission implements Runnable {
 		}
 		
 		this.missionEnd();
-		System.out.println("[ Thread ]" + "-- Fin Mission --" + this.vehicule);
+		System.out.println("[ Thread ] " + "-- Fin Mission -- " + this.vehicule.getVehiculeDto().getId());
 	}
 	
 }

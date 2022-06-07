@@ -16,7 +16,8 @@ public class MissionFeu extends Mission {
 	}
 	
 	protected boolean missionContinue() {
-		return Requester.requestFireByID( this.feu.getId()).equals(null);
+		//System.out.println("TRUC DE VICK " + Requester.requestFireByID(this.feu.getId()).equals(null));
+		return Requester.requestFireByID(this.feu.getId()).equals(null);
 	}
 
 }
