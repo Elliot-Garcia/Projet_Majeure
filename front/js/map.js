@@ -111,7 +111,7 @@ async function DisplayAll() {
                         <p>peopleIdSet : ${feature.peopleIdSet}</p>
                     </li>
                 </ul>`;
-                if ((feature.name).includes("Cas5")) {
+                if ((feature.name).includes("C5")) {
                     filterValue = 'filter_blue';
                     
                 }
@@ -135,7 +135,7 @@ async function DisplayAll() {
                                 <p>liquidType : ${feature.liquidType}</p>
                             </li>
                         </ul>`;
-                if ((feature.facilityRefID) == 339) {
+                if ((feature.facilityRefID) == 663369) {
                     filterValue = 'filter_blue';
                 }
                 else {
