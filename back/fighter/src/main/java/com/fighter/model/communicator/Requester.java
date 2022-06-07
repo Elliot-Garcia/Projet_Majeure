@@ -52,8 +52,26 @@ public class Requester {
 		return result;
 	}
 	
+	public static void postVehicle( VehiculeDto info ) {
+
+	      HttpHeaders headers = new HttpHeaders();
+	      headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+	      headers.setContentType(MediaType.APPLICATION_JSON);
+
+	      RestTemplate restTemplate = new RestTemplate();
+
+	      // Data attached to the request.
+	      HttpEntity<VehiculeDto> requestBody = new HttpEntity<>(info, headers);
+
+	      // Send request with POST method.
+	      String URL = ConstantURL.getVehiculeurl() + ConstantURL.teamCode;
+	      restTemplate.postForObject(URL, requestBody, VehiculeDto.class);
+	}
 	
 	public static void putVehicule( VehiculeDto info) {
+		postVehicle( info );
+		return ;
+		/*
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
@@ -64,7 +82,10 @@ public class Requester {
 
 		// Send request with PUT method.
 		String URL = ConstantURL.getVehiculeurl() + ConstantURL.teamCode + "/" + info.getId();
+		System.out.println(URL);
+		System.out.println(requestBody.getBody());
+		
 		restTemplate.put(URL, requestBody);
+		*/
 	}
 }
-

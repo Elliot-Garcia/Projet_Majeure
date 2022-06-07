@@ -142,10 +142,10 @@ async function DisplayAll() {
                     filterValue = 'filter_black';
                 }
             }
-            // create a HTML element for each feature
-            const el = document.createElement('div');
-            el.className = "marker " + filterValue;
-            el.style.backgroundImage = "url(" + urlIcon + ")";
+                // create a HTML element for each feature
+                const el = document.createElement('div');
+                el.className = "marker " + filterValue;
+                el.style.backgroundImage = "url(" + urlIcon + ")";
             
             // make a marker for each feature and add it to the map
             const marker = new mapboxgl.Marker(el)

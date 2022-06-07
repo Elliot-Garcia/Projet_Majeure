@@ -10,7 +10,7 @@ public class mainRemoteControl {
 	public static void main(String[] args) {
 		RemoteControl ctr = new RemoteControl();
 		
-		LogMission.initOwnVehicle(Arrays.asList(Requester.requestVehicule()));
+		LogMission.initOwnVehicle( Arrays.asList( Requester.requestVehicule() ) );
 				
 		while(true) {
 			
