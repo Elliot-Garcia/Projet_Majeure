@@ -33,12 +33,12 @@ public class Strategy {
 		
 		boolean res = false;
 		
-		float max = -1;
+		int max = -1;
 		Vehicule vehiculeMax = null;
 		
 		for ( Vehicule vehicule : LogMission.ownVehicule ) {
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
-			float score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
+			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
 			//System.out.println("Score :" + score);
 			//System.out.println("Busy :" + vehicule.getMission() + " " + vehicule);
 			
