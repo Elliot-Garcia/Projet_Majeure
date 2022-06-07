@@ -16,8 +16,8 @@ public class DirectionService {
 		this.paths = LogMission.getPath();
 	}
 	
-	public JsonNode findPath(Integer idVehicule) {
-		return this.paths.get(idVehicule);
+	public String findPath(Integer idVehicule) {
+		return this.paths.get(idVehicule).toString();
 	}
 	
 }
