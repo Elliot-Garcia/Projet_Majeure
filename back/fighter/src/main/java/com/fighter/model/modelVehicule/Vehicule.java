@@ -26,16 +26,13 @@ public class Vehicule extends AbstractVehicule {
 		LiquidType liquidType = vehicule.getLiquidType();
 		float score_liquidType = liquidType.getEfficiency( fire.getType() ) * 100;
 	    float score_fireIntensity = fire.getIntensity();
-	    float score_distance = 1/path.distancePoint() * 10^6;
+	    float score_distance = (float) (1 / ( path.distancePoint() ) * Math.pow(10, 6) );
 	    
 	    float score = score_liquidType + score_fireIntensity + score_distance;
 	    
 	    if ( this.getVehiculeDto().getType().getFuelConsumption() * path.distancePoint() < this.getVehiculeDto().getFuel() ) {
-	    	score *= 0;
+	    	score *= -1;
 	    }
-
-	  
-
 		return (int)score;
 		}
 	

@@ -42,7 +42,7 @@ public abstract class Mission implements Runnable {
 			double newLon = this.chemin.pathMap().get(0);
 			double newLat = this.chemin.pathMap().get(1);
 			if (newLon >= 0 && newLat >= 0) {
-				this.vehicule.deplacement(newLon, newLat);
+				this.vehicule.deplacement(newLon, newLat, chemin.distanceBetweenPoint());
 				res = true;
 			}
 		}
@@ -62,7 +62,7 @@ public abstract class Mission implements Runnable {
 			
 			try {
 				deplacement = this.missionDeplacement(deplacement);
-			    Thread.sleep(this.deltaTemps);
+			    Thread.sleep(this.deltaTemps/4);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
 			}

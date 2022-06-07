@@ -10,9 +10,10 @@ public interface InterfaceVehicule {
 	public void missionTrue();
 	public void missionFalse();
 	public boolean getMission();
-	public void deplacement(double lon, double lat);
+	public void deplacement(double lon, double lat, int distance);
 	public int calculScore(FireDto fire, FacilityDto facility, Path path);
 	public void gestionCrew();
+	public void gestionConsommationEssence(int distance);
 	public FacilityDto findFacility();
 	public VehiculeDto getVehiculeDto();
 	
