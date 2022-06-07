@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class MapBoxPath {
 
 	// Format Coord : lon1,lat1;lon2,lat2
-	static final String MapBoxURL1 = "https://api.mapbox.com/directions/v5/mapbox/cycling/";
+	static final String MapBoxURL1 = "https://api.mapbox.com/directions/v5/mapbox/driving/";
 	static final String MapBoxURL2 = "?geometries=geojson&access_token=pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg";
 	
 	

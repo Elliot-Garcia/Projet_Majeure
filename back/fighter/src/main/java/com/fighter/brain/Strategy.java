@@ -28,9 +28,22 @@ public class Strategy {
 		this.feu = feu;
 		this.vehicules = vehicules;
 	}
+	
+	private boolean isVehicleDispo() {
+		for ( Vehicule vehicule : LogMission.ownVehicule ) {
+			if (!vehicule.getMission()) {
+				return true;
+			}
+		}
+		return false;
+	}
 		
 	
 	public boolean assignVehicule() {
+		
+		if (!this.isVehicleDispo()) {
+			return false;
+		}
 		
 		boolean res = false;
 		
