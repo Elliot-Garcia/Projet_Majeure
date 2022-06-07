@@ -50,15 +50,6 @@ public class Path {
 
 		return newpoint;
 	}
-	/**
-	System.out.println(json);
-		JSONObject routes = (JSONObject) json.getJSONObject(json.get("routes"));
-		System.out.println(routes);
-		JSONObject geometry = (JSONObject) json.get("geometry");
-		System.out.println(geometry);
-		JSONObject coordinates = (JSONObject) json.get("coordinates");
-		System.out.println(geometry);
-	*/
 	
 	public List<Double> pathNewPoint() {
 		if(distance_lat == 0.0 && distance_lon == 0.0) {
@@ -106,6 +97,18 @@ public class Path {
 		return newpoint;
 	}
 	
+	public int time() {
+		double temps_tot = distancePoint()/ConstantCalcul.getVitessevehicule();
+		System.out.println(temps_tot);
+		MapBoxPath map = new MapBoxPath();
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
+		JsonNode node = mapper.valueToTree(json);
+		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
+		double temps = temps_tot/list.size();
+		System.out.println(temps);
+		return (int)temps;
+	}
 	
 	private void setDebut_lon(double debut_lon) {
 		this.debut_lon = debut_lon;
@@ -127,12 +130,13 @@ public class Path {
 		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
 		p.pathNewPoint();
 		p.pathMap();
-		
-
+		p.time();
+/**
 		while(true) {
 			TimeUnit.MILLISECONDS.sleep(1);
 			p.pathMap();
 		}
+*/
 
 	}
 	

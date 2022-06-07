@@ -58,13 +58,13 @@ public class RemoteControl {
 	
 	private List<FireDto> checkMissionedFire( List<FireDto> newFire ) {
 		
-		System.out.println("Check missioned :" + LogMission.getFire().size());
+		//System.out.println("Check missioned :" + LogMission.getFire().size());
 		
 		for ( FireDto missonedFire : LogMission.getFire()) {
-			System.out.println("Fire id: " + missonedFire.getId());
+			//System.out.println("Fire id: " + missonedFire.getId());
 			if ( newFire.contains(missonedFire) ){
 				newFire.remove(missonedFire);
-				System.out.println("Fire already spoted");
+				//System.out.println("Fire already spoted");
 				
 			}
 		}
@@ -92,15 +92,15 @@ public class RemoteControl {
 		boolean ret = false;
 		List<FireDto> newFire = Arrays.asList(Requester.requestFire());
 		
-		System.out.println("Fire on map: " + newFire.size());
+		//System.out.println("Fire on map: " + newFire.size());
 		
 		newFire = this.checkMissionedFire( newFire );
 		
-		System.out.println("Fire not missioned " + newFire.size());
+		//System.out.println("Fire not missioned " + newFire.size());
 
 		if ( (newFire.size() > 0 ) ) {
 			for ( FireDto someFire : newFire) {
-					System.out.println("Ask Strat :");
+					//System.out.println("Ask Strat :");
 					this.launchStrat( someFire );
 				}
 		}
