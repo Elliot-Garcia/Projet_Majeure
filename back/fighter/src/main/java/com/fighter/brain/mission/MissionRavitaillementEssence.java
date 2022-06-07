@@ -1,23 +1,22 @@
 package com.fighter.brain.mission;
 
 import com.fighter.model.calcul.Path;
-import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public class MissionFeu extends Mission {
-	
+public class MissionRavitaillementEssence extends Mission {
+
 	private InterfaceVehicule vehicule;
-	private FireDto feu;
 	private Path chemin;
 	
-	public MissionFeu(InterfaceVehicule v, double lonDestination, double latDestination, FireDto f) {
+	public MissionRavitaillementEssence(InterfaceVehicule v, double lonDestination, double latDestination) {
 		super(v, lonDestination, latDestination);
-		this.feu = f;
 	}
 	
+	@Override
 	protected boolean missionContinue() {
-		return ( !(Requester.requestFireByID(this.feu.getId()) == null) );
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

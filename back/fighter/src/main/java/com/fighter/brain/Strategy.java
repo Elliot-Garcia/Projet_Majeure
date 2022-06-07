@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fighter.brain.mission.Mission;
 import com.fighter.brain.mission.MissionFeu;
+import com.fighter.brain.mission.MissionRavitaillementEssence;
 import com.fighter.brain.mission.LogMission.LogMission;
 import com.fighter.model.calcul.Path;
 import com.fighter.model.dto.FacilityDto;
@@ -48,10 +49,13 @@ public class Strategy {
 				max = score;
 				vehiculeMax = vehicule;
 			}
+			if (score == -1) {
+				missionRavitaillementEssence(vehicule, vehicule.findFacility());
+			}
 		}
 		
 		if (vehiculeMax != null) {
-			this.launchMission(vehiculeMax, feu);
+			this.missionFeu(vehiculeMax, feu);
 			System.out.println("++++++++++++ New assignement +++++++++++++++");
 			System.out.println("------------------------- MISSION --------------------------------");
 			res = true;
@@ -59,20 +63,22 @@ public class Strategy {
 		return res;
 	}
 	
-	private boolean launchMission(Vehicule v, FireDto fi) {
-
-
-		//System.out.println("-- Debut Mission --");
-	
-		//Create a Runnable is charge of executing cyclic actions 
+	private void missionFeu(Vehicule v, FireDto fi) {
 		Mission mission = new MissionFeu(v, fi.getLon(), fi.getLat(),fi);
-				
+		launchMission(mission);
+	}
+	private void missionRavitaillementEssence(Vehicule v, FacilityDto f) {
+		Mission mission = new MissionRavitaillementEssence(v, f.getLon(), f.getLat());
+		launchMission(mission);
+	}
+	
+	private boolean launchMission(Mission mission) {
 		// A Runnable is held by a Thread which manage lifecycle of the Runnable
 		Thread thread  = new Thread(mission);
 				
 		// The Thread is started and the method run() of the associated DisplayRunnable is launch
 		thread.start();
-		System.out.println("-- Thread launched --" + v);
+		System.out.println("-- Thread launched --");
 		
 		return true;
 	}
