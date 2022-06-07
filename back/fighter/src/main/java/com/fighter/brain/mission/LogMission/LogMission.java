@@ -11,7 +11,6 @@ import com.fighter.model.modelVehicule.Vehicule;
 public class LogMission {
 	
 	private static List<FireDto> fire  = new ArrayList();
-	
 	public  static List<Vehicule> ownVehicule = new ArrayList();
 	
 	public static boolean debutMission( FireDto fire ) {

@@ -58,12 +58,11 @@ public abstract class Mission implements Runnable {
 		boolean deplacement = true;
 		
 		while ( this.missionContinue() )  {
-			
-			
+
 			try {
 				deplacement = this.missionDeplacement(deplacement);
 				this.missionAction(deplacement);
-			    Thread.sleep(this.deltaTemps/2);
+			    Thread.sleep(this.deltaTemps/4);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
 			}
