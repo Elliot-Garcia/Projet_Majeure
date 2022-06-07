@@ -34,7 +34,6 @@ public class Path {
 		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
 		JsonNode node = mapper.valueToTree(json);
 		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
-		System.out.println(list);
 		int taille = list.size();
 		List<Double> newpoint = new ArrayList<Double>();		
 		if(i<taille) {
@@ -46,7 +45,6 @@ public class Path {
 			newpoint.add(-1.0);
 			newpoint.add(-1.0);
 		}
-		System.out.println(newpoint);
 
 		return newpoint;
 	}
@@ -57,13 +55,10 @@ public class Path {
 			distance_lat = arrivee_lat - debut_lat;
 			distance_lon = arrivee_lon - debut_lon;
 			double distance_deg = Math.sqrt(Math.pow(distance_lat,2)+Math.pow(distance_lon, 2));
-			System.out.println(distance_deg);
 			double coeff = (distance_deg/distance_metre);
-			System.out.println("coef" + coeff);
 		}
 		
 		 List<Double> newpoint = new ArrayList<Double>();
-		 System.out.println("Longi_deb = "+this.debut_lon+", Lat_deb = "+ this.debut_lat+", arrive_long= " + this.arrivee_lon + ", arriver_lat= "+this.arrivee_lat);
 		 double chemin_lat = debut_lat + distance_lat*ConstantCalcul.getCoeffkm2coord()*13.8889;
 		 double chemin_lon = debut_lon + distance_lon*ConstantCalcul.getCoeffkm2coord()*13.8889;
 	
@@ -74,7 +69,6 @@ public class Path {
 
 			setDebut_lat(debut_lat);
 		 	setDebut_lon(debut_lon);
-			System.out.println("dans le feu2");
 		}
 		if((chemin_lon >= arrivee_lon-ConstantCalcul.getCoeffkm2coord()*50 && chemin_lon <= arrivee_lon+ConstantCalcul.getCoeffkm2coord()*50)) {
 		 	newpoint.add(this.debut_lon);
@@ -82,32 +76,27 @@ public class Path {
 
 		 	setDebut_lon(debut_lon);
 		 	setDebut_lat(debut_lat);
-		 	System.out.println("dans le feu1");
 		}
 	 	else {
 	 		 newpoint.add(chemin_lon);
 			 newpoint.add(chemin_lat);
 			 setDebut_lon(chemin_lon);
 			 setDebut_lat(chemin_lat);
-			 System.out.println("go au feu");
 
 	 	}
 		 
-		System.out.println("newpoint= "+ newpoint);
 		return newpoint;
 	}
 	
 	public int time() {
 		double temps_tot = distancePoint()/ConstantCalcul.getVitessevehicule();
-		System.out.println(temps_tot);
 		MapBoxPath map = new MapBoxPath();
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
 		JsonNode node = mapper.valueToTree(json);
 		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
 		double temps = temps_tot/list.size();
-		System.out.println(temps);
-		return (int)temps*1000;
+		return (int)temps;
 	}
 	
 	private void setDebut_lon(double debut_lon) {
@@ -122,7 +111,6 @@ public class Path {
 		Coord depart = new Coord(debut_lon, debut_lat);
 		Coord arrivee = new Coord(arrivee_lon, arrivee_lat);
 		int distance = GisTools.computeDistance2(depart, arrivee);
-		System.out.println(distance);
 		return distance;
 	}
 	
