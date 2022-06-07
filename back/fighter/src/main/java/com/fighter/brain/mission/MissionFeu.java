@@ -17,7 +17,9 @@ public class MissionFeu extends Mission {
 	}
 	
 	protected boolean missionContinue() {
-		return Requester.requestFireByID(this.feu.getId()).equals(null);
+		System.out.println("Vick :" );
+		System.out.println(Requester.requestFireByID(this.feu.getId()) == null);
+		return ( !(Requester.requestFireByID(this.feu.getId()) == null) );
 	}
 
 }
