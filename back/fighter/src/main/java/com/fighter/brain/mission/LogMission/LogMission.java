@@ -14,23 +14,15 @@ import com.fighter.model.modelVehicule.Vehicule;
 
 public class LogMission {
 	
-	private static List<FireDto> fire  = new ArrayList();
 	public  static List<Vehicule> ownVehicule = new ArrayList();
 	public  static Map<Integer, JsonNode> directions = new HashMap();
 	
-	public static boolean debutMission( VehiculeDto vehicule, Path chemin, FireDto fire ) {
+	public static void debutMission( VehiculeDto vehicule, Path chemin) {
 		LogMission.directions.put(vehicule.getId(), chemin.getPoints());
-		LogMission.fire.add( fire );
-		return true;
 	}
 
-	public static boolean finMission( VehiculeDto vehicule, FireDto fire ) {
+	public static void finMission( VehiculeDto vehicule ) {
 		LogMission.directions.remove(vehicule.getId());
-		return LogMission.fire.remove( fire );
-	}
-
-	public static List<FireDto> getFire() {
-		return fire;
 	}
 	
 	public static Map<Integer, JsonNode> getPath() {

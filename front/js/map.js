@@ -69,9 +69,9 @@ function addRoute(coords) {
 async function getMatch(id) {
     // Create the query
     const query = await fetch(
-        `http://127.0.0.1:8080/back/direction?idVehicule=${id}`,
+        `http://localhost:8080/direction?idVehicule=${id}`,
       { method: 'GET',
-      mode: 'no-cors'}
+      cors: { origin: "*" }}
     );
     const response = await query.json();
       return;

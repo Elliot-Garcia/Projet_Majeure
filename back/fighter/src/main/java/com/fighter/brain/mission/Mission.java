@@ -1,5 +1,6 @@
 package com.fighter.brain.mission;
 
+import com.fighter.brain.mission.LogMission.LogMission;
 import com.fighter.model.calcul.Path;
 import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FireDto;
@@ -23,10 +24,12 @@ public abstract class Mission implements Runnable {
 	
 	private void missionStart() {
 		this.vehicule.missionTrue();
+		LogMission.debutMission( vehicule.getVehiculeDto(), chemin);
 	}
 	
 	private void missionEnd() {
 		this.vehicule.missionFalse();
+		LogMission.finMission( vehicule.getVehiculeDto());
 	}
 	
 	private Path initPath(double lonDestination, double latDestination) {
