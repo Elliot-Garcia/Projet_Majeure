@@ -37,18 +37,17 @@ public class Path {
 		System.out.println(list);
 		int taille = list.size();
 		List<Double> newpoint = new ArrayList<Double>();		
-		if(i<=taille) {
+		if(i<taille) {
 			newpoint.add(list.get(i).get(0).asDouble());
 			newpoint.add(list.get(i).get(1).asDouble());
-			System.out.println(list.get(i).get(0).asDouble());
-			System.out.println(list.get(i).get(1).asDouble());
 			i+=1;
-			System.out.println(newpoint);
 		}else {
 			//Plus rien dans la liste à traiter, on renvoie de nouveau la derniere position
-			newpoint.add(list.get(taille).get(0).asDouble());
-			newpoint.add(list.get(taille).get(1).asDouble());
+			newpoint.add(-1.0);
+			newpoint.add(-1.0);
 		}
+		System.out.println(newpoint);
+
 		return newpoint;
 	}
 	/**
@@ -128,13 +127,13 @@ public class Path {
 		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
 		p.pathNewPoint();
 		p.pathTest();
-		p.pathTest();
-/**
+		
+
 		while(true) {
 			TimeUnit.MILLISECONDS.sleep(1);
-			p.pathNewPoint();
+			p.pathTest();
 		}
-*/
+
 	}
 	
 }
