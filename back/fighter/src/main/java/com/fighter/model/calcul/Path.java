@@ -97,7 +97,7 @@ public class Path {
 		return newpoint;
 	}
 	
-	public double time() {
+	public int time() {
 		double temps_tot = distancePoint()/ConstantCalcul.getVitessevehicule();
 		System.out.println(temps_tot);
 		MapBoxPath map = new MapBoxPath();
@@ -107,7 +107,7 @@ public class Path {
 		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
 		double temps = temps_tot/list.size();
 		System.out.println(temps);
-		return temps;
+		return (int)temps;
 	}
 	
 	private void setDebut_lon(double debut_lon) {
