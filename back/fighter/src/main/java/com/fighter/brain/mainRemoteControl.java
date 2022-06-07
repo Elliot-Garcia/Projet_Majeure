@@ -15,7 +15,7 @@ public class mainRemoteControl {
 		while(true) {
 			
 			ctr.compare();
-			System.out.println(ctr);
+			//System.out.println(ctr);
 			
 			//System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
 		
