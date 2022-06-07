@@ -53,11 +53,12 @@ public abstract class Mission implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("[ Thread ] " + "-- Debut Mission -- " + this.vehicule.getVehiculeDto().getId());
+		System.out.println("[ Thread ] " + "-- DELTA -- " + this.deltaTemps);
 		this.missionStart();
 		boolean deplacement = true;
 		
 		while ( this.missionContinue() )  {
-			System.out.println("[Thread] -- Turn()");
+			
 			
 			try {
 				deplacement = this.missionDeplacement(deplacement);
