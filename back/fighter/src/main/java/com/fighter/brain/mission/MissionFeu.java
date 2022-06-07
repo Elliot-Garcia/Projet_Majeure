@@ -16,6 +16,10 @@ public class MissionFeu extends Mission {
 		this.feu = f;
 	}
 	
+	protected void missionAction(boolean deplacement) {
+		
+	}
+	
 	protected boolean missionContinue() {
 		return ( !(Requester.requestFireByID(this.feu.getId()) == null) );
 	}
