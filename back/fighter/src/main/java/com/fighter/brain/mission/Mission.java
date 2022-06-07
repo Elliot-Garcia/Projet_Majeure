@@ -19,6 +19,7 @@ public abstract class Mission implements Runnable {
 	}
 	
 	protected abstract boolean missionContinue();
+	protected abstract void missionAction(boolean deplacement);
 	
 	private void missionStart() {
 		this.vehicule.missionTrue();
@@ -62,6 +63,7 @@ public abstract class Mission implements Runnable {
 			
 			try {
 				deplacement = this.missionDeplacement(deplacement);
+				this.missionAction(boolean deplacement);
 			    Thread.sleep(this.deltaTemps/4);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
