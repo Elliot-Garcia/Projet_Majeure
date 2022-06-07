@@ -33,6 +33,55 @@ const map = new mapboxgl.Map({
     antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
 
+// Draw the Map Matching route as a new layer on the map
+function addRoute(coords) {
+    // If a route is already loaded, remove it
+    if (map.getSource('route')) {
+      map.removeLayer('route');
+      map.removeSource('route');
+    } else {
+      // Add a new layer to the map
+      map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: coords
+          }
+        },
+        layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        paint: {
+          'line-color': '#03AA46',
+          'line-width': 8,
+          'line-opacity': 0.8
+        }
+      });
+    }
+  }
+
+// Make a Map Matching request
+async function getMatch(id) {
+    // Create the query
+    const query = await fetch(
+        `https://127.0.0.1:8080/back/direction?idVehicule=${id}`,
+      { method: 'GET' }
+    );
+    const response = await query.json();
+      return;
+    // Get the coordinates from the response
+    const coords = response.matchings[0].geometry;
+    // Draw the route on the map
+    addRoute(coords);
+  }
+  
+  
+
 async function DisplayAll() {
 
     const boxes = document.querySelectorAll('.marker');
@@ -146,6 +195,9 @@ async function DisplayAll() {
             const el = document.createElement('div');
             el.className = "marker " + filterValue;
             el.style.backgroundImage = "url(" + urlIcon + ")";
+            if (urlIcon == 'media/img/point/camion.png') {
+                el.setAttribute("onclick", "getMatch("+feature.id+")");
+            }
             
             // make a marker for each feature and add it to the map
             const marker = new mapboxgl.Marker(el)
