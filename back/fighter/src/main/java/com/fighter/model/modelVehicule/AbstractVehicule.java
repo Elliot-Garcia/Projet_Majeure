@@ -41,7 +41,7 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	
 	@Override
 	public void gestionConsommationEssence(int distance) {
-		float consommation = this.vehicule.getType().getFuelConsumption()*distance;
+		float consommation = this.vehicule.getType().getFuelConsumption()*distance/100;
 		this.vehicule.setFuel(this.vehicule.getFuel()-consommation);
 	}
 
