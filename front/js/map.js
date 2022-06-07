@@ -17,9 +17,12 @@ async function Start(){
     geojson[0].list = await getFire();
     geojson[1].list = await GetFacilities();
     geojson[2].list = await GetVehicle();
-    console.log(geojson);
     DisplayAll();
 }
+
+var intervalId = window.setInterval(function(){
+    Start();
+  }, 1000);
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg';
 const map = new mapboxgl.Map({
@@ -31,6 +34,13 @@ const map = new mapboxgl.Map({
 });
 
 async function DisplayAll() {
+
+    const boxes = document.querySelectorAll('.marker');
+
+    boxes.forEach(box => {
+        box.remove();
+    });
+
     filterValue = "";
     htmlValue = ""
     for (const obj of geojson) {
@@ -132,14 +142,13 @@ async function DisplayAll() {
                     filterValue = 'filter_black';
                 }
             }
-                console.log(filterValue);
             // create a HTML element for each feature
             const el = document.createElement('div');
             el.className = "marker " + filterValue;
             el.style.backgroundImage = "url(" + urlIcon + ")";
             
             // make a marker for each feature and add it to the map
-            new mapboxgl.Marker(el)
+            const marker = new mapboxgl.Marker(el)
                 .setLngLat([feature.lon, feature.lat])
                 .setPopup(
                     new mapboxgl.Popup({ offset: 25 }) // add popups
