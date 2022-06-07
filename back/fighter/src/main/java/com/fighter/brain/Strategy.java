@@ -53,8 +53,6 @@ public class Strategy {
 		for ( Vehicule vehicule : LogMission.ownVehicule ) {
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
 			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
-			//System.out.println("Score :" + score);
-			//System.out.println("Busy :" + vehicule.getMission() + " " + vehicule);
 		
 			if (score > max && !vehicule.getMission()) {
 				max = score;

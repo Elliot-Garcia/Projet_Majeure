@@ -81,16 +81,8 @@ public class Path {
 		return distance;
 	}
 	
-	public static void main(String[] args) throws InterruptedException  {
-		Path p = new Path(4.792258384694939,45.721839937555565,4.784500833959483,45.760286520753304);
-		p.pathMap();
-		p.time();
-/**
-		while(true) {
-			TimeUnit.MILLISECONDS.sleep(1);
-			p.pathMap();
-		}
-*/
+	public JsonNode getPoints() {
+		return this.points;
 
 	}
 	

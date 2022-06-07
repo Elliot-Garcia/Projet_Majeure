@@ -5,6 +5,7 @@ import com.fighter.model.communicator.Requester;
 import com.fighter.model.dto.FacilityDto;
 import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
+import com.project.model.dto.Coord;
 
 public abstract class AbstractVehicule implements InterfaceVehicule {
 	
