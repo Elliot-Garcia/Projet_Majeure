@@ -65,7 +65,6 @@ public class RemoteControl {
 			if ( newFire.contains(missonedFire) ){
 				newFire.remove(missonedFire);
 				//System.out.println("Fire already spoted");
-				
 			}
 		}
 		return newFire ;
@@ -92,11 +91,9 @@ public class RemoteControl {
 		boolean ret = false;
 		List<FireDto> newFire = Arrays.asList(Requester.requestFire());
 		
-		//System.out.println("Fire on map: " + newFire.size());
-		
+		System.out.println("Fire on map: " + newFire.size());
 		newFire = this.checkMissionedFire( newFire );
-		
-		//System.out.println("Fire not missioned " + newFire.size());
+		System.out.println("Fire not missioned " + newFire.size());
 
 		if ( (newFire.size() > 0 ) ) {
 			for ( FireDto someFire : newFire) {
