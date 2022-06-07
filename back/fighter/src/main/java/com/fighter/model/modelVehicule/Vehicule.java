@@ -33,9 +33,6 @@ public class Vehicule extends AbstractVehicule {
 	    if ( this.getVehiculeDto().getType().getFuelConsumption() * path.distancePoint() < this.getVehiculeDto().getFuel() ) {
 	    	score *= -1;
 	    }
-
-	  
-
 		return (int)score;
 		}
 	
