@@ -2,7 +2,7 @@ package com.fighter.model.calcul;
 
 public class ConstantCalcul {
 
-public static final double vitesseVehicule = 13.8889;//m/s
+public static final double vitesseVehicule = 20;//m/s
 public static final double coeffKm2Coord = 8.98208085003168E-6;
 public static final int deltaT = 1;//Seconde
 

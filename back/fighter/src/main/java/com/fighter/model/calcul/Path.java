@@ -107,7 +107,7 @@ public class Path {
 		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
 		double temps = temps_tot/list.size();
 		System.out.println(temps);
-		return (int)temps;
+		return (int)temps*1000;
 	}
 	
 	private void setDebut_lon(double debut_lon) {
