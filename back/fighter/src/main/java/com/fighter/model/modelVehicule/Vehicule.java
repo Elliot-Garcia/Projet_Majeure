@@ -20,20 +20,23 @@ public class Vehicule extends AbstractVehicule {
 
 	@Override
 	public int calculScore(FireDto fire, FacilityDto facility, Path path) {
-		int score = 0;
+		
 		
 		// Score with liquidType
 		LiquidType liquidType = vehicule.getLiquidType();
-		int score_liquidType = (int) (-0.5 + liquidType.getEfficiency(fire.getType())) * 10;
-		
-		score += score_liquidType;
-		
-		// Score with distance
-		//int distance = path.dczc();
-		int score_distance = (int) (1);
-		
-		
-		return score;
+		float score_liquidType = liquidType.getEfficiency( fire.getType() ) * 100;
+	    float score_fireIntensity = fire.getIntensity();
+	    float score_distance = 1/path.distancePoint() * 10^6;
+	    
+	    float score = score_liquidType + score_fireIntensity + score_distance;
+	    
+	    if ( this.getVehiculeDto().getType().getFuelConsumption() * path.distancePoint() < this.getVehiculeDto().getFuel() ) {
+	    	score *= 0;
+	    }
+
+	  
+
+		return (int)score;
 		}
 	
 	public static void main(String[] args) {

@@ -36,23 +36,32 @@ public abstract class Mission implements Runnable {
 		return chemin;
 	}
 	
-	private void missionDeplacement() {
-		double newLon = this.chemin.pathMap().get(0);
-		double newLat = this.chemin.pathMap().get(1);
-		this.vehicule.deplacement(newLon, newLat);
+	private boolean missionDeplacement(boolean deplacement) {
+		boolean res = false;
+		if (deplacement) {
+			double newLon = this.chemin.pathMap().get(0);
+			double newLat = this.chemin.pathMap().get(1);
+			if (newLon >= 0 && newLat >= 0) {
+				this.vehicule.deplacement(newLon, newLat);
+				res = true;
+			}
+		}
+		return res;
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("[ Thread ] " + "-- Debut Mission -- " + this.vehicule.getVehiculeDto().getId());
+		System.out.println("[ Thread ] " + "-- DELTA -- " + this.deltaTemps);
 		this.missionStart();
+		boolean deplacement = true;
 		
 		while ( this.missionContinue() )  {
-			System.out.println("[Thread] -- Turn()");
+			
 			
 			try {
-				this.missionDeplacement();
+				deplacement = this.missionDeplacement(deplacement);
 			    Thread.sleep(this.deltaTemps);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
