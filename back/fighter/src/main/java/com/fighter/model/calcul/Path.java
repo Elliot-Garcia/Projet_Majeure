@@ -25,15 +25,18 @@ public class Path {
 		this.debut_lat = debut_lat;
 		this.arrivee_lon = arrivee_lon;
 		this.arrivee_lat = arrivee_lat;
+		this.points = initPoints(debut_lon, debut_lat,arrivee_lon,arrivee_lat);
 	}
 	
-
-	public List<Double> pathMap() {
+	private JsonNode initPoints(double debut_lon, double debut_lat, double arrivee_lon, double arrivee_lat) {
 		MapBoxPath map = new MapBoxPath();
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
 		JsonNode node = mapper.valueToTree(json);
-		this.points = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
+		return node.get("routes").findValue("geometry").findValues("coordinates").get(0);
+	}
+	
+	public List<Double> pathMap() {
 		int taille = this.points.size();
 		List<Double> newpoint = new ArrayList<Double>();		
 		if(i<taille) {
@@ -57,23 +60,21 @@ public class Path {
 	
 	public int time() {
 		double temps_tot = distancePoint()/ConstantCalcul.getVitessevehicule();
-		MapBoxPath map = new MapBoxPath();
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode json = map.requestMapBoxPath(debut_lon, debut_lat, arrivee_lon, arrivee_lat);
-		JsonNode node = mapper.valueToTree(json);
-		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
-		double temps = temps_tot/list.size();
+		double temps = temps_tot/this.points.size();
 		return (int)temps*1000;
 	}
 
-	public int distancePoint() {
-		Coord depart = new Coord(this.points.get(i).get(0).asDouble(), this.points.get(i).get(1).asDouble());
-		Coord arrivee = new Coord(this.points.get(i+1).get(0).asDouble(), this.points.get(i+1).get(1).asDouble());
-		int distance = GisTools.computeDistance2(depart, arrivee);
+	public int distanceBetweenPoint() {
+		int distance = 0;
+		if(i<this.points.size()) {
+			Coord depart = new Coord(this.points.get(i).get(0).asDouble(), this.points.get(i).get(1).asDouble());
+			Coord arrivee = new Coord(this.points.get(i+1).get(0).asDouble(), this.points.get(i+1).get(1).asDouble());
+			distance = GisTools.computeDistance2(depart, arrivee);
+		}
 		return distance;
 	}
 	
-	public int distanceBetweenPoint() {
+	public int distancePoint() {
 		Coord depart = new Coord(debut_lon, debut_lat);
 		Coord arrivee = new Coord(arrivee_lon, arrivee_lat);
 		int distance = GisTools.computeDistance2(depart, arrivee);
