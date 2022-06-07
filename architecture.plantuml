@@ -93,10 +93,12 @@ package Model <<Rectangle>> {
             - double depart_lon
             - double arrivee_lat
             - double arrivee_lon
+            - JsonNode points
             + Path(double dep_lat,double dep_lon,double arr_lat,double arr_lon)
-            pathNewPoint()
-            setDebut_lon()
-            setDebut_lat()
+            initPoint()
+            pathMap()
+            time()
+            distanceBetweenPoint()
             distancePoint()
         }
 
@@ -107,7 +109,7 @@ package Model <<Rectangle>> {
         }
 
         class ConstantCalcul {
-            - vitesseVehicule {km/h}
+            - vitesseVehicule {m/s}
             - coeffKm2Coord
             - deltaT {secondes}
             @getter()
