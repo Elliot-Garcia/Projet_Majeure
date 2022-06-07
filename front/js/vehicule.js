@@ -2,7 +2,7 @@
  * ADD vehicle
  */
 function AddVehicle(){
-    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/b6b21258-84b8-42dd-bdf4-35014914c964"; 
+    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/38621c5b-ce36-4c3d-b36b-31a2fcbea44d"; 
     const data = getInput();
     let context =   {
                         method: 'POST',
@@ -23,7 +23,7 @@ function AddVehicle(){
  * DELETE ALL VEHICLE
  */
 function DeleteAllVehicle(){
-    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/b6b21258-84b8-42dd-bdf4-35014914c964"; 
+    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/38621c5b-ce36-4c3d-b36b-31a2fcbea44d"; 
     let context =   {
                         method: 'DELETE',
                         headers: {
@@ -43,7 +43,7 @@ function DeleteAllVehicle(){
 function DeleteOneVehicle(){
     const data = getID();
     console.log(data)
-    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/b6b21258-84b8-42dd-bdf4-35014914c964/"+data;
+    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/38621c5b-ce36-4c3d-b36b-31a2fcbea44d/"+data;
     let context =   {
                         method: 'DELETE',
                         headers: {
@@ -65,7 +65,7 @@ function DeleteOneVehicle(){
     const data = getID();
     console.log("tetetet")
     console.log(data)
-    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/b6b21258-84b8-42dd-bdf4-35014914c964/"+data;
+    const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/38621c5b-ce36-4c3d-b36b-31a2fcbea44d/"+data;
     let context =   {
                         method: 'DELETE',
                         headers: {
