@@ -9,43 +9,53 @@
     border-radius: 50%;
     cursor: pointer;
   }
-/*
-  .marker_vehicle {
-    background-image: url('../media/img/point/camion.png');
-    background-size: cover;
-    background-color: rgba(255,0,0,0.2);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
 
-  .marker_notre_vehicle {
-    background-image: url('../media/img/point/camion.png');
-    background-size: cover;
-    background-color: rgba(0,255,0,0.2);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+  /* The sidepanel menu */
+ .sidepanel {
+  height: 500px; /* Specify a height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: lightgray; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
 
-  .marker_facility {
-    background-image: url('../media/img/point/caserne.png');
-    background-size: cover;
-    background-color: rgba(255,0,0,0.2);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+/* The sidepanel links */
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
 
-  .marker_notre_facility {
-    background-image: url('../media/img/point/caserne.png');
-    background-size: cover;
-    background-color: rgba(0,255,0,0.2);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-  }*/
+/* When you mouse over the navigation links, change their color */
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+} 
