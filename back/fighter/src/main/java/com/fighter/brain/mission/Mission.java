@@ -6,53 +6,40 @@ import com.fighter.model.dto.FireDto;
 import com.fighter.model.dto.VehiculeDto;
 import com.fighter.model.modelVehicule.InterfaceVehicule;
 
-public class Mission implements InterfaceMission, Runnable {
+public abstract class Mission implements InterfaceMission, Runnable {
 
 	private InterfaceVehicule vehicule;
-	private FireDto feu;
+	private Path chemin;
+	private int deltaTemps;
 	
-	public Mission(InterfaceVehicule v, FireDto f) {
+	public Mission(InterfaceVehicule v, double lonDestination, double latDestination) {
 		this.vehicule = v;
-		this.feu = f;
+		this.chemin = initPath(lonDestination, latDestination);
+		this.deltaTemps = chemin.time();
 	}
 	
-	public void debutMission() {
-		this.vehicule.missionTrue();
-		this.vehicule.deplacement(this.feu.getLon(), this.feu.getLat());
-	}
+	protected abstract boolean missionContinue();
 	
-	public void finMission() {
-		this.vehicule.getVehiculeDto().setLat(this.vehicule.findFacility().getLat());
-		this.vehicule.getVehiculeDto().setLon(this.vehicule.findFacility().getLon());
-		this.vehicule.missionFalse();
-		Requester.putVehicule(this.vehicule.getVehiculeDto());
-	}
-	
-	@Override
-	public void missionAllerAuFeu(double lonFeu, double latFeu) {
-		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
-				vehicule.getVehiculeDto().getLat(),
-				feu.getLon(),
-				feu.getLon());
+	private void missionStart() {
 		this.vehicule.missionTrue();
 	}
 	
-	@Override
-	public void missionRavitaillementEssence(double lonRav, double latRav) {
+	private void missionEnd() {
+		this.vehicule.missionFalse();
+	}
+	
+	private Path initPath(double lonDestination, double latDestination) {
 		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
 				vehicule.getVehiculeDto().getLat(),
-				vehicule.findFacility().getLon(),
-				vehicule.findFacility().getLat());
+				lonDestination,
+				latDestination);
+		return chemin;
 	}
 	
-	@Override
-	public void missionRavitaillementExtincteur(double lonRav, double latRav) {
-		
-	}
-	
-	@Override
-	public void missionAnnule() {
-		this.vehicule.missionFalse();
+	private void missionDeplacement() {
+		double newLon = this.chemin.pathMap().get(0);
+		double newLat = this.chemin.pathMap().get(1);
+		this.vehicule.deplacement(newLon, newLat);
 	}
 
 	@Override
@@ -60,24 +47,21 @@ public class Mission implements InterfaceMission, Runnable {
 		// TODO Auto-generated method stub
 		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule.getVehiculeDto());
 		System.out.println("[ Thread ]" + "-- Debut Mission --" + this.vehicule);
-		this.debutMission();
+		this.missionStart();
 		
-		while ( Requester.requestFireByID( this.feu.getId()).equals(null) )  {
+		while ( this.missionContinue() )  {
 			System.out.println("[Thread]-- Turn()");
 			
 			try {
+				this.missionDeplacement();
 			    Thread.sleep(750);
 			} catch(InterruptedException e) {
 			    System.out.println("got interrupted!");
 			}
 		}
 		
-		this.finMission();
+		this.missionEnd();
 		System.out.println("[ Thread ]" + "-- Fin Mission --" + this.vehicule);
 	}
-
-	//private void actuMission(Path path) {
-		
-	//}
 	
 }
