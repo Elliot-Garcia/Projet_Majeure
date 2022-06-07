@@ -12,12 +12,10 @@ function AddVehicle(){
                           },
                         body : JSON.stringify(data)
                     };
-    console.log(data)
     fetch(GET_CHUCK_URL,context)
         .then(response => response)
             .then(response => callback(response))
             .catch(error => err_callback(error));
-    console.log(response)
     return response;
 }
 
@@ -44,7 +42,6 @@ function DeleteAllVehicle(){
  */
 function DeleteOneVehicle(){
     const data = getID();
-    console.log("tetetet")
     console.log(data)
     const GET_CHUCK_URL="http://vps.cpe-sn.fr:8081/vehicle/b6b21258-84b8-42dd-bdf4-35014914c964/"+data;
     let context =   {
@@ -185,7 +182,6 @@ function DisplayVehicle(vehicle){
             new mapboxgl.Marker(el).setLngLat([vehicle[i].lon,vehicle[i].lat]).addTo(map);
         }
       }
-    console.log("OUIUIUIUIU");
 }
 
 
