@@ -15,8 +15,7 @@ public class MissionRavitaillementEssence extends Mission {
 	
 	@Override
 	protected boolean missionContinue() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.vehicule.getVehiculeDto().getFuel() == this.vehicule.getVehiculeDto().getType().getFuelCapacity();
 	}
 
 }

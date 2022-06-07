@@ -32,11 +32,17 @@ public abstract class AbstractVehicule implements InterfaceVehicule {
 	}
 	
 	@Override
-	public void deplacement(double lon, double lat) {
+	public void deplacement(double lon, double lat, int distance) {
 		this.vehicule.setLon(lon);
 		this.vehicule.setLat(lat);
-
+		gestionConsommationEssence(distance);
 		Requester.putVehicule(this.vehicule);
+	}
+	
+	@Override
+	public void gestionConsommationEssence(int distance) {
+		float consommation = this.vehicule.getType().getFuelConsumption()*distance;
+		this.vehicule.setFuel(this.vehicule.getFuel()-consommation);
 	}
 
 	@Override
