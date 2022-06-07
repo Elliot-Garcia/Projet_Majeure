@@ -66,7 +66,7 @@ public class Path {
 
 	public int distanceBetweenPoint() {
 		int distance = 0;
-		if(i<this.points.size()) {
+		if(i<this.points.size()-1) {
 			Coord depart = new Coord(this.points.get(i).get(0).asDouble(), this.points.get(i).get(1).asDouble());
 			Coord arrivee = new Coord(this.points.get(i+1).get(0).asDouble(), this.points.get(i+1).get(1).asDouble());
 			distance = GisTools.computeDistance2(depart, arrivee);

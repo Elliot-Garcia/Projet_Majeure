@@ -31,8 +31,8 @@ public class MissionRavitaillement extends Mission {
 	
 	@Override
 	protected boolean missionContinue() {
-		return !(this.vehicule.getVehiculeDto().getFuel() == this.vehicule.getVehiculeDto().getType().getFuelCapacity()
-				&& this.vehicule.getVehiculeDto().getLiquidQuantity() == this.vehicule.getVehiculeDto().getType().getLiquidCapacity());
+		return !( (this.vehicule.getVehiculeDto().getFuel() == this.vehicule.getVehiculeDto().getType().getFuelCapacity())
+				&& (this.vehicule.getVehiculeDto().getLiquidQuantity() == this.vehicule.getVehiculeDto().getType().getLiquidCapacity()));
 	}
 
 }

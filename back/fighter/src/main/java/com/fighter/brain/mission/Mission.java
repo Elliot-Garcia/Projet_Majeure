@@ -43,7 +43,7 @@ public abstract class Mission implements Runnable {
 			double newLon = this.chemin.pathMap().get(0);
 			double newLat = this.chemin.pathMap().get(1);
 			if (newLon >= 0 && newLat >= 0) {
-				this.vehicule.deplacement(newLon, newLat, chemin.distanceBetweenPoint()/1000);
+				this.vehicule.deplacement(newLon, newLat, (float) (chemin.distanceBetweenPoint()/1000.0));
 				res = true;
 			}
 		}
@@ -54,7 +54,6 @@ public abstract class Mission implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("[ Thread ] " + "-- Debut Mission -- " + this.vehicule.getVehiculeDto().getId());
-		System.out.println("[ Thread ] " + "-- DELTA -- " + this.deltaTemps);
 		this.missionStart();
 		boolean deplacement = true;
 		

@@ -13,7 +13,7 @@ public class MapBoxPath {
 	
 	public static JsonNode requestMapBoxPath(double lon1, double lat1, double lon2, double lat2) {
 		String url = MapBoxURL1 + "" + lon1 + "," + lat1 + ";" + lon2 + "," + lat2 + "" + MapBoxURL2;
-		System.out.println(url);
+		//System.out.println(url);
 		RestTemplate restTemplate = new RestTemplate();
 		JsonNode result = restTemplate.getForObject(url, JsonNode.class);
 		return result;
