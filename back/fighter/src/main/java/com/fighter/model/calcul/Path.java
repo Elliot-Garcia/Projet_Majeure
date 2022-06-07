@@ -66,14 +66,17 @@ public class Path {
 		return (int)temps*1000;
 	}
 
-	public int distancePoint() {
-		Coord depart = new Coord(this.points.get(i).get(0).asDouble(), this.points.get(i).get(1).asDouble());
-		Coord arrivee = new Coord(this.points.get(i+1).get(0).asDouble(), this.points.get(i+1).get(1).asDouble());
-		int distance = GisTools.computeDistance2(depart, arrivee);
+	public int distanceBetweenPoint() {
+		int distance = 0;
+		if(i<this.points.size()) {
+			Coord depart = new Coord(this.points.get(i).get(0).asDouble(), this.points.get(i).get(1).asDouble());
+			Coord arrivee = new Coord(this.points.get(i+1).get(0).asDouble(), this.points.get(i+1).get(1).asDouble());
+			distance = GisTools.computeDistance2(depart, arrivee);
+		}
 		return distance;
 	}
 	
-	public int distanceBetweenPoint() {
+	public int distancePoint() {
 		Coord depart = new Coord(debut_lon, debut_lat);
 		Coord arrivee = new Coord(arrivee_lon, arrivee_lat);
 		int distance = GisTools.computeDistance2(depart, arrivee);
