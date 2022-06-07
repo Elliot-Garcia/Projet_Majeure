@@ -1,33 +1,21 @@
 @startuml
 
 package Model <<Rectangle>> {
-    entity VehiculeDto {
-      - int @id
-      - int crewMember
-      - int facilityRefID
-      - float fuel
-      - double lat
-      - double lon
-      - float liquidQuantity
-      - liquidType liquidType
-      - typeVehicule type
 
-        @VehiculeDto(String)
-      @setter()
-      @getter()
-    }
+    package DTO <<Folder>> {
+        entity VehiculeDto {
+        }
 
-    entity FireDto {
-        - @id
-    }
-    entity FacilityDto {
-        - @id
-    }
+        entity FireDto {
+        }
+        entity FacilityDto {
+        }
 
-    enum liquidType {
-        ALL
-        CARBON_DIOXIDE
-        ...
+        enum liquidType {
+        }
+
+        entity VehiculeType {
+        }
     }
 
     package ModelVehicule <<rectangle>> {
@@ -76,12 +64,17 @@ package Model <<Rectangle>> {
 
         package BlocMission <<rectangle>> {
             abstract Mission {
+                run()
             }
 
             class MissionFeu {
             }
 
+            class MissionRavitaillement {
+            }
+
             Mission o-- MissionFeu
+            Mission o-- MissionRavitaillement
 
             class LogMission {
                 - List<FireDto> missionEnCours
@@ -124,11 +117,20 @@ package Model <<Rectangle>> {
     package Communicator <<Folder>> {
 
         class Requester {
-
+            requestFire()
+            requestOneFire()
+            requestFacility()
+            requestFacilityById()
+            requestVehicle()
+            requestOneVehicle()
+            postVehicle()
         }
 
         enum ConstantURL {
-
+            - FireURL
+	        - VehiculeURL
+	        - FacilityURL
+            @getter()
         }
 
     }
@@ -150,6 +152,12 @@ package Controller <<Rectangle>> {
         GET getListVehicule()
         POST updateVehicule()
     }
+
+    class VehiculeRest {
+        GET getListVehicule()
+        POST updateVehicule()
+    }
+
 
     VehiculeRest -|> VehiculeService
     VehiculeService -|> VehiculeRepository
