@@ -27,7 +27,14 @@ public class Path {
 		this.arrivee_lat = arrivee_lat;
 		this.points = initPoints(debut_lon, debut_lat,arrivee_lon,arrivee_lat);
 	}
-	
+	/**
+	 * Initialise les points à parcourir sur la map
+	 * @param debut_lon
+	 * @param debut_lat
+	 * @param arrivee_lon
+	 * @param arrivee_lat
+	 * @return la liste des points
+	 */
 	private JsonNode initPoints(double debut_lon, double debut_lat, double arrivee_lon, double arrivee_lat) {
 		MapBoxPath map = new MapBoxPath();
 		ObjectMapper mapper = new ObjectMapper();
@@ -36,6 +43,10 @@ public class Path {
 		return node.get("routes").findValue("geometry").findValues("coordinates").get(0);
 	}
 	
+	/**
+	 * Parcours la liste pour renvoyer les coordonnées suivantes
+	 * @return liste contenant longitude et latitude
+	 */
 	public List<Double> pathMap() {
 		int taille = this.points.size();
 		List<Double> newpoint = new ArrayList<Double>();		
@@ -57,13 +68,20 @@ public class Path {
 		return newpoint;
 	}
 
-	
+	/**
+	 * Calcul le pas de temps pour parcourir notre distance total
+	 * @return pas de temps en millisecondes
+	 */
 	public int time() {
 		double temps_tot = distancePoint()/ConstantCalcul.getVitessevehicule();
 		double temps = temps_tot/this.points.size();
 		return (int)temps*1000;
 	}
 
+	/**
+	 * Calcul la distance entre deux points consécutifs
+	 * @return la distance entre deux points en mètre
+	 */
 	public int distanceBetweenPoint() {
 		int distance = 0;
 		if(i<this.points.size()-1) {
@@ -74,6 +92,10 @@ public class Path {
 		return distance;
 	}
 	
+	/**
+	 * Calcul la distance entre notre point de départ et d'arriver
+	 * @return la distance en mètre
+	 */
 	public int distancePoint() {
 		Coord depart = new Coord(debut_lon, debut_lat);
 		Coord arrivee = new Coord(arrivee_lon, arrivee_lat);
@@ -81,6 +103,10 @@ public class Path {
 		return distance;
 	}
 	
+	/**
+	 * getter des points
+	 * @return liste des point
+	 */
 	public JsonNode getPoints() {
 		return this.points;
 
