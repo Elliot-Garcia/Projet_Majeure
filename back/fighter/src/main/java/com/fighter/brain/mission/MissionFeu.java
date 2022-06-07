@@ -13,11 +13,10 @@ public class MissionFeu extends Mission {
 	
 	public MissionFeu(InterfaceVehicule v, double lonDestination, double latDestination, FireDto f) {
 		super(v, lonDestination, latDestination);
+		this.feu = f;
 	}
 	
 	protected boolean missionContinue() {
-		System.out.println( "TRUC DE VICK <3" );
-		System.out.println( Requester.requestFireByID(this.feu.getId()).equals(null) );
 		return Requester.requestFireByID(this.feu.getId()).equals(null);
 	}
 

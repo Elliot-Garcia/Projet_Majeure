@@ -96,7 +96,7 @@ public class Path {
 		JsonNode node = mapper.valueToTree(json);
 		JsonNode list = node.get("routes").findValue("geometry").findValues("coordinates").get(0);
 		double temps = temps_tot/list.size();
-		return (int)temps;
+		return (int)temps*1000;
 	}
 	
 	private void setDebut_lon(double debut_lon) {
