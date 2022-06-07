@@ -31,7 +31,7 @@ public class Vehicule extends AbstractVehicule {
 	    float score = score_liquidType + score_fireIntensity + score_distance;
 	    
 	    if ( this.getVehiculeDto().getType().getFuelConsumption() * path.distancePoint() < this.getVehiculeDto().getFuel() ) {
-	    	score *= 0;
+	    	score *= -1;
 	    }
 
 	  
