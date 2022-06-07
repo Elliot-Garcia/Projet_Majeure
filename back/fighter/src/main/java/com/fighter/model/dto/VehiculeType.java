@@ -26,7 +26,7 @@ public enum VehiculeType {
 			this.liquidCapacity = liquidCapacity;
 			this.liquidConsumption = liquidConsumption;
 			this.fuelCapacity = liquidCapacity;
-			this.efficiency = efficiency;
+			this.fuelConsumption = fuelConsumption;
 			this.maxSpeed=maxSpeed;
 		}
 
