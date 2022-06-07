@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fighter.brain.mission.Mission;
 import com.fighter.brain.mission.MissionFeu;
-import com.fighter.brain.mission.MissionRavitaillementEssence;
+import com.fighter.brain.mission.MissionRavitaillement;
 import com.fighter.brain.mission.LogMission.LogMission;
 import com.fighter.model.calcul.Path;
 import com.fighter.model.dto.FacilityDto;
@@ -50,7 +50,7 @@ public class Strategy {
 				vehiculeMax = vehicule;
 			}
 			if (score == -1) {
-				missionRavitaillementEssence(vehicule, vehicule.findFacility());
+				missionRavitaillement(vehicule, vehicule.findFacility());
 			}
 		}
 		
@@ -67,8 +67,8 @@ public class Strategy {
 		Mission mission = new MissionFeu(v, fi.getLon(), fi.getLat(),fi);
 		launchMission(mission);
 	}
-	private void missionRavitaillementEssence(Vehicule v, FacilityDto f) {
-		Mission mission = new MissionRavitaillementEssence(v, f.getLon(), f.getLat());
+	private void missionRavitaillement(Vehicule v, FacilityDto f) {
+		Mission mission = new MissionRavitaillement(v, f.getLon(), f.getLat());
 		launchMission(mission);
 	}
 	
