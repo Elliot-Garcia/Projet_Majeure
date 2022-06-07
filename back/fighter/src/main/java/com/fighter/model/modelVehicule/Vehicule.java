@@ -20,17 +20,18 @@ public class Vehicule extends AbstractVehicule {
 
 	@Override
 	public float calculScore(FireDto fire, FacilityDto facility, Path path) {
+		
+		
 		// Score with liquidType
 		LiquidType liquidType = vehicule.getLiquidType();
-		
 		float score_liquidType = liquidType.getEfficiency( fire.getType() ) * 100;
 	    float score_fireIntensity = fire.getIntensity();
 	    float score_distance = 1/path.distancePoint() * 10^6;
 		
+	    if( path .distancePoint() * 2 > this.vehicule )
+	    this.mission
 	    float score = score_liquidType + score_fireIntensity + score_distance;
 
-		
-		
 		return score;
 		}
 	
