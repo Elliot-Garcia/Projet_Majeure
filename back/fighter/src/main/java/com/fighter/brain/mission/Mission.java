@@ -24,12 +24,12 @@ public abstract class Mission implements Runnable {
 	
 	private void missionStart() {
 		this.vehicule.missionTrue();
-		LogMission.debutMission( vehicule.getVehiculeDto(), chemin);
+		LogMission.debutMissionPath( vehicule.getVehiculeDto(), chemin);
 	}
 	
 	private void missionEnd() {
 		this.vehicule.missionFalse();
-		LogMission.finMission( vehicule.getVehiculeDto());
+		LogMission.finMissionPath( vehicule.getVehiculeDto());
 	}
 	
 	private Path initPath(double lonDestination, double latDestination) {

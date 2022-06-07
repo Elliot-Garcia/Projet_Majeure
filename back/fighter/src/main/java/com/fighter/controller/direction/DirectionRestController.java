@@ -20,7 +20,7 @@ public class DirectionRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/direction")
-	public String listDeck(@RequestParam Integer idVehicule) {
+	public String getPath(@RequestParam Integer idVehicule) {
 		return sDirection.findPath(idVehicule);
 	}
 	

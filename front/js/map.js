@@ -74,11 +74,11 @@ async function getMatch(id) {
       cors: { origin: "*" }}
     );
     const response = await query.json();
-      return;
     // Get the coordinates from the response
-    const coords = response.matchings[0].geometry;
+    //const coords = response.matchings[0].geometry;
     // Draw the route on the map
-    addRoute(coords);
+    console.log(response)
+    addRoute(response);
   }
   
   

@@ -56,6 +56,20 @@ public class RemoteControl {
 		return(ret);
 	}
 	
+	private List<FireDto> checkMissionedFire( List<FireDto> newFire ) {
+		
+		//System.out.println("Check missioned :" + LogMission.getFire().size());
+		
+		for ( FireDto missonedFire : LogMission.getFire()) {
+			//System.out.println("Fire id: " + missonedFire.getId());
+			if ( newFire.contains(missonedFire) ){
+				newFire.remove(missonedFire);
+				//System.out.println("Fire already spoted");
+			}
+		}
+		return newFire ;
+	}
+	
 	/**
 	 * Compare to set of data
 	 * @param two DTOclass[]
