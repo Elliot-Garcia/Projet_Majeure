@@ -20,27 +20,28 @@ package Model <<Rectangle>> {
 
     package ModelVehicule <<rectangle>> {
         interface InterfaceVehicule {
-            - mission
-            - Vehicule info
-            deplacement()
-            ravitaillement()
-            gestionCrew()
-            findCaserne()
+            + void missionTrue();
+            + void missionFalse();
+            + boolean getMission();
+            + void deplacement(double lon, double lat, float distance);
+            + int calculScore(FireDto fire, FacilityDto facility, Path path);
+            + void gestionCrew();
+            + void gestionConsommationEssence(float distance);
+            + FacilityDto findFacility();
+            + VehiculeDto getVehiculeDto();
         }
 
         abstract AbstractVehicule {
-            - mission
-            - Vehicule info
-            deplacement()
-            ravitaillement()
-            gestionCrew()
-            findCaserne()
+            - boolean mission
+            - VehiculeDto vehicule
+            + FacilityDto findFacilityById(int id)
+            + abstract int calculScore(FireDto fire, FacilityDto facility, Path path)
         }
 
         class Vehicule {
             - mission
             - VehiculeDto vehiculeDto
-            calculScore()
+            + calculScore(FireDto fire, FacilityDto facility, Path path)
         }
 
         InterfaceVehicule o.. AbstractVehicule
