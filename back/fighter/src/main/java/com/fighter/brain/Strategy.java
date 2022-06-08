@@ -54,7 +54,7 @@ public class Strategy {
 
 			Path path = new Path( vehicule.getVehiculeDto().getLon(), vehicule.getVehiculeDto().getLat(), this.feu.getLon(), this.feu.getLat());
 			int score = vehicule.calculScore(this.feu, vehicule.findFacility(), path);
-		
+			
 			if (score > max && !vehicule.getMission()) {
 				max = score;
 				vehiculeMax = vehicule;
