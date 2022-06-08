@@ -9,7 +9,7 @@ import com.fighter.model.modelVehicule.InterfaceVehicule;
 
 public abstract class Mission implements Runnable {
 
-	private InterfaceVehicule vehicule;
+	protected InterfaceVehicule vehicule;
 	private Path chemin;
 	private int deltaTemps;
 	
