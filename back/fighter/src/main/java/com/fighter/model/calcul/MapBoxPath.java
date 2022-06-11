@@ -10,7 +10,14 @@ public class MapBoxPath {
 	static final String MapBoxURL1 = "https://api.mapbox.com/directions/v5/mapbox/driving/";
 	static final String MapBoxURL2 = "?geometries=geojson&access_token=pk.eyJ1IjoiZWxsaWdhcjM0IiwiYSI6ImNsM3ZjOHhoaDA5MXYzYnBsdHFxamsxcjYifQ.UyvHBJ_M2OpnPGJUV-BBYg";
 	
-	
+	/**
+	 * Requête à l'api de MapBox pour récuperer l'itinéraire à suivre sur la route
+	 * @param lon1
+	 * @param lat1
+	 * @param lon2
+	 * @param lat2
+	 * @return liste de points pour du véhicule jusqu'a l'objectif
+	 */
 	public static JsonNode requestMapBoxPath(double lon1, double lat1, double lon2, double lat2) {
 		String url = MapBoxURL1 + "" + lon1 + "," + lat1 + ";" + lon2 + "," + lat2 + "" + MapBoxURL2;
 		//System.out.println(url);
