@@ -22,16 +22,28 @@ public abstract class Mission implements Runnable {
 	protected abstract boolean missionContinue();
 	protected abstract void missionAction(boolean deplacement);
 	
+	/**
+	 * Setup the begining of the mission
+	 */
 	private void missionStart() {
 		this.vehicule.missionTrue();
 		LogMission.debutMissionPath( vehicule.getVehiculeDto(), chemin);
 	}
 	
+	/**
+	 * Setup the end of the mission
+	 */
 	private void missionEnd() {
 		this.vehicule.missionFalse();
 		LogMission.finMissionPath( vehicule.getVehiculeDto());
 	}
 	
+	/**
+	 * Init the path to the target
+	 * @param lonDestination
+	 * @param latDestination
+	 * @return the path
+	 */
 	private Path initPath(double lonDestination, double latDestination) {
 		Path chemin = new Path(vehicule.getVehiculeDto().getLon(),
 				vehicule.getVehiculeDto().getLat(),
@@ -40,6 +52,11 @@ public abstract class Mission implements Runnable {
 		return chemin;
 	}
 	
+	/**
+	 * Move to the target following the path
+	 * @param deplacement
+	 * @return true : done
+	 */
 	private boolean missionDeplacement(boolean deplacement) {
 		boolean res = false;
 		if (deplacement) {
@@ -53,6 +70,9 @@ public abstract class Mission implements Runnable {
 		return res;
 	}
 
+	/**
+	 * main methode while the thread is launched
+	 */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

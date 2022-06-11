@@ -16,10 +16,17 @@ public class MissionFeu extends Mission {
 		this.feu = f;
 	}
 	
+	/**
+	 * nothing to do in that case
+	 */
 	protected void missionAction(boolean deplacement) {
 		
 	}
 	
+	/**
+	 * the mission continue as long as the fire existe.
+	 * @return true : it existe, false : it doesn't
+	 */
 	protected boolean missionContinue() {
 		return ( !(Requester.requestFireByID(this.feu.getId()) == null) );
 	}

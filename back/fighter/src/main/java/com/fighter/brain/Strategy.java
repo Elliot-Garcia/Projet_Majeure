@@ -29,6 +29,10 @@ public class Strategy {
 		this.vehicules = vehicules;
 	}
 	
+	/**
+	 * check is there are some avaliable vehicle for a mission
+	 * @return true : yes, false : no
+	 */
 	private boolean isVehicleDispo() {
 		for ( Vehicule vehicule : LogMission.ownVehicule ) {
 			if (!vehicule.getMission()) {
@@ -38,7 +42,10 @@ public class Strategy {
 		return false;
 	}
 		
-	
+	/**
+	 * assigne mission to a vehicule
+	 * @return ture : done
+	 */
 	public boolean assignVehicule() {
 		
 		if (!this.isVehicleDispo()) {
@@ -73,15 +80,31 @@ public class Strategy {
 		return res;
 	}
 	
+	/**
+	 * launch a mission with fire mission setings
+	 * @param v vehicle
+	 * @param fi fireDto
+	 */
 	private void missionFeu(Vehicule v, FireDto fi) {
 		Mission mission = new MissionFeu(v, fi.getLon(), fi.getLat(),fi);
 		launchMission(mission);
 	}
+	
+	/**
+	 * Launch a mission with suplise mission setings
+	 * @param v
+	 * @param f
+	 */
 	private void missionRavitaillement(Vehicule v, FacilityDto f) {
 		Mission mission = new MissionRavitaillement(v, f.getLon(), f.getLat());
 		launchMission(mission);
 	}
 	
+	/**
+	 * Launch the misson in a Thread
+	 * @param mission
+	 * @return true
+	 */
 	private boolean launchMission(Mission mission) {
 		// A Runnable is held by a Thread which manage lifecycle of the Runnable
 		Thread thread  = new Thread(mission);
